@@ -1,0 +1,51 @@
+{
+  "name": "hdo-enighet",
+  "version": "1.0.0",
+  "main": "bundle.js",
+  "scripts": {
+    "fetch-data": "curl https://www.holderdeord.no/data/agreement.json -O",
+    "dev": "node server/dev-server.js",
+    "lint": "eslint components",
+    "build": "webpack --bail --optimize-minimize --optimize-occurence-order --optimize-dedupe && cp index.html build/",
+    "deploy": "npm run build && scp -r build/* hdo@hdo02.holderdeord.no:/webapps/files/prototyper/enighet"
+  },
+  "author": "jari@holderdeord.no",
+  "license": "ISC",
+  "babel": {
+    "presets": [
+      "react",
+      "es2015",
+      "stage-0"
+    ]
+  },
+  "devDependencies": {
+    "watchify": "^3.2.2"
+  },
+  "dependencies": {
+    "babel-core": "^6.0.20",
+    "babel-eslint": "^4.1.3",
+    "babel-loader": "^6.0.1",
+    "babel-preset-es2015": "^6.0.15",
+    "babel-preset-react": "^6.0.15",
+    "babel-preset-stage-0": "^6.0.15",
+    "babelify": "^7.2.0",
+    "classnames": "^2.2.3",
+    "css-loader": "^0.23.1",
+    "d3": "^3.5.12",
+    "eslint-plugin-react": "^3.6.2",
+    "express": "^4.13.3",
+    "isomorphic-fetch": "^2.2.1",
+    "node-sass": "^3.4.2",
+    "path": "^0.12.7",
+    "react": "^0.14",
+    "react-dom": "^0.14.0",
+    "react-highcharts": "^6.0.0",
+    "react-hot-loader": "^1.3.0",
+    "react-motion": "^0.3.1",
+    "request": "^2.67.0",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.1"
+  }
+}
