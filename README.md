@@ -1,6 +1,6 @@
 # hdo-enighet
 
-Visualize vote agreement in the Norwegian parliament.
+Visualize party agreement in the Norwegian parliament.
 
 ## Development
 
