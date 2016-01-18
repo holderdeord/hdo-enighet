@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Motion, spring } from 'react-motion';
 import d3 from 'd3';
 import Sparkline from './Sparkline';
+import { logoFor } from './utils';
 
 const scale = d3.scale
     .linear()
@@ -21,14 +22,14 @@ export default class AgreementTable extends Component {
                 <thead>
                     <tr>
                         <th></th>
-                        {parties.map(p => <th key={p}>{this.logoFor(p)}</th>)}
+                        {parties.map(p => <th key={p}>{logoFor(p)}</th>)}
                     </tr>
                 </thead>
 
                 <tbody>
                     {parties.map((party, rowIndex) => (
                         <tr key={party}>
-                            <th>{this.logoFor(party)}</th>
+                            <th>{logoFor(party)}</th>
                             {
                                 parties.map((otherParty, colIndex) =>
                                     this.renderComparison(party, otherParty, rowIndex, colIndex)
@@ -84,13 +85,6 @@ export default class AgreementTable extends Component {
         }
     }
 
-
-    logoFor(party) {
-        return <img
-            src={`https://www.holderdeord.no/api/parties/${party.toLowerCase()}/logo/?version=medium`}
-            width={'42px'}
-        />
-    }
 }
 
 

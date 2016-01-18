@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactHighcharts from 'react-highcharts/bundle/highcharts';
+import { logoFor } from './utils';
 
 export default class ComboCharts extends Component {
     shouldComponentUpdate(nextProps, nextState) {
@@ -10,6 +11,7 @@ export default class ComboCharts extends Component {
         return (
             <div className="hdo-card">
                 <div className="row">
+
                     {this.props.combos.map(combo => this.renderComboChart(combo))}
                 </div>
             </div>
@@ -40,7 +42,8 @@ export default class ComboCharts extends Component {
             },
 
             title: {
-                text: `${left} og ${right}`
+                text: '',
+                enabled: false,
             },
 
             legend: { 
@@ -55,7 +58,9 @@ export default class ComboCharts extends Component {
                 min: 0,
                 max: 100,
                 title: { enabled: false },
-                format: '{value}%'
+                labels: { 
+                    format: '{value}%' 
+                }
             },
 
             credits: {
@@ -74,7 +79,10 @@ export default class ComboCharts extends Component {
 
         return (
             <div key={left+right} className={`col-md-6 text-md-center`} id={`${left}-v-${right}`}>
-                <div className="m-a-2"><ReactHighcharts config={config} isPureConfig /></div>
+                <div className="m-a-2">
+                    <h4>{left} og {right}</h4>
+                    <ReactHighcharts config={config} isPureConfig />
+                </div>
             </div>
         );
     }

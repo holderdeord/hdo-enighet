@@ -38,9 +38,7 @@ export default class SessionSelector extends Component {
         return (
             <select value={selected} onChange={(e) => this.props.onChange(e.target.value)}>
                 {this.props.sessions.map(session => (
-                    <option
-                        key={session}
-                    >
+                    <option key={session}>
                         {session}
                     </option>
                 ))}
