@@ -5,6 +5,12 @@ header h1 {
   font-weight: 300;
 }
 
+body {
+  color: #333;
+  background-color: #fafafa;
+}
+
+
 .hdo-card {
   background-color: #fff;
   box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
@@ -15,6 +21,8 @@ main {
   margin: 1rem 0;
 }
 
+
+
 .hdo-logo {
   padding-top: 3rem;
   padding-bottom: 1.25rem;
@@ -22,10 +30,6 @@ main {
   background-position: 100% 0;
   background-repeat: no-repeat;
   background-size: auto 2.5rem;
-}
-
-body {
-  color: #333;
 }
 
 a {
@@ -48,6 +52,10 @@ html ::selection {
   th, td {
     text-align: center;
     vertical-align: middle;
+  }
+
+  .diagonal {
+
   }
 }
 

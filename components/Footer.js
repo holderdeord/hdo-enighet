@@ -14,6 +14,7 @@ export default class Footer extends Component {
                     <small>
                         <div>Utregningen teller hvert voteringsforslag som en egen votering.</div>
                         <div>Alle forslag som blir enstemmig vedtatt er utelatt.</div>
+                        <div>Kildekode på <a href="https://github.com/holderdeord/hdo-enighet">GitHub</a> lisensiert under <a href="http://opensource.org/licenses/BSD-3-Clause">BSD</a>.</div>
                         <div>Spørsmål? Ta <a href="mailto:&#106;&#97;&#114;&#105;&#0064;&#104;&#111;&#108;&#100;&#101;&#114;&#100;&#101;&#111;&#114;&#100;.&#110;&#111;">kontakt</a>.</div>
                     </small>
                 </div>
