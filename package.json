@@ -11,7 +11,7 @@
     "test": "npm run lint"
   },
   "author": "jari@holderdeord.no",
-  "license": "ISC",
+  "license": "BSD",
   "babel": {
     "presets": [
       "react",
@@ -37,6 +37,7 @@
     "d3": "^3.5.12",
     "express": "^4.13.3",
     "isomorphic-fetch": "^2.2.1",
+    "lodash.groupby": "^4.0.1",
     "node-sass": "^3.4.2",
     "path": "^0.12.7",
     "react": "^0.14",

@@ -11,7 +11,7 @@ export default class Sparkline extends Component {
 
         const y = d3.scale.linear()
           .range([height, 0])
-          .domain(d3.extent(data, (d) => d))
+          .domain([0, 100])
 
         const line = d3.svg.line()
           .x((d, i) => x(i))

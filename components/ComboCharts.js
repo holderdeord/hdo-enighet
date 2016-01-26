@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactHighcharts from 'react-highcharts/bundle/highcharts';
 import { logoFor } from './utils';
+import groupBy from 'lodash.groupby';
 
 export default class ComboCharts extends Component {
     shouldComponentUpdate(nextProps, nextState) {
@@ -8,12 +9,37 @@ export default class ComboCharts extends Component {
     }
 
     render() {
+        const groups = groupBy(this.props.combos, ([left, right]) => left)
+        const lefts = Object.keys(groups).sort((a,b) => a.localeCompare(b));
+
         return (
             <div className="hdo-card">
-                <div className="row">
+                {lefts.map(left => this.renderGroup(left, groups[left]))}
+            </div>
+        );
+    }
 
-                    {this.props.combos.map(combo => this.renderComboChart(combo))}
+    renderGroup(left, combos) {
+
+        return (
+            <div key={left}>
+                <div className="row">
+                    <div className="col-md-12">
+                        <div className="m-a-1">
+                            {logoFor(left)}
+                        </div>
+
+                        <div className="row">
+                            {
+                                combos
+                                    .sort((a, b) => a[1].localeCompare(b[1]))
+                                    .map(combo => this.renderComboChart(combo))
+                            }
+                        </div>
+                    </div>
                 </div>
+
+                <hr />
             </div>
         );
     }
@@ -83,9 +109,9 @@ export default class ComboCharts extends Component {
         };
 
         return (
-            <div key={left+right} className={`col-md-6 text-md-center`} id={`${left}-v-${right}`}>
-                <div className="m-a-2">
-                    <h4>{left} og {right}</h4>
+            <div key={left+right} className={`col-md-6 col-sm-12 text-md-center`} id={`${left}-v-${right}`}>
+                <div className="m-a-1">
+                    <h4>{logoFor(right)}</h4>
                     <ReactHighcharts config={config} isPureConfig />
                 </div>
             </div>
