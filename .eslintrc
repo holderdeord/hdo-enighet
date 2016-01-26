@@ -9,7 +9,7 @@
   },
   "parser": "babel-eslint",
   "rules": {
-    "indent": [4],
+    "indent": [2, 4],
     "quotes": [2, "single"],
     "strict": [2, "never"],
     "react/jsx-uses-react": 2,

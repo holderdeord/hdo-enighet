@@ -18,10 +18,10 @@ export default class Sparkline extends Component {
           .y((d) => y(d))
           .interpolate(interpolation)
 
-          return (
+        return (
             <svg className="sparkline" width={width} height={height}>
                 <path d={line(data)} />
             </svg>
-        )
+        );
     }
 }

@@ -18,7 +18,7 @@ export default class AgreementTable extends Component {
         } = this.props;
 
         return (
-            <table className="table">
+            <table className="table table-condensed">
                 <thead>
                     <tr>
                         <th></th>
@@ -57,23 +57,24 @@ export default class AgreementTable extends Component {
         if (selectedSession === 'Alle') {
             const values = sessions.map(session => {
                 const sessionData = bySession[session];
-                return left === right ? 100 : Math.round((sessionData.data[key] / sessionData.total) * 100);
+                return left === right ? 100 : Math.round((sessionData[key].count / sessionData[key].total) * 100);
             });
 
             return <td key={key}><Sparkline width={50} height={20} data={values} /></td>;
         } else {
-            let dataset = bySession[this.props.selectedSession];
+            let combo = bySession[this.props.selectedSession][key];
+            let val = 0;
+            let title = '';
 
-            const { total, data } = dataset;
-            const count = data[key];
-
-            let val = Math.round((count / total) * 100);
-            let backgroundColor = 'white';
+            if (combo) {
+                val = Math.round((combo.count / combo.total) * 100);
+                title = `${combo.count} / ${combo.total} voteringsforslag`;
+            } 
 
             return (
                 <Motion key={key} defaultStyle={{val: 0}} style={{val: spring(val)}}>
                     {value => <td
-                        title={`${count} / ${total} voteringer`}
+                        title={title}
                         className="text-center"
                         style={{backgroundColor: scale(value.val)}}>
                             <a href={`#${[left,right].sort().join('-v-')}`}>{value.val === 0 ? '' : `${Math.round(value.val)}%`}</a>

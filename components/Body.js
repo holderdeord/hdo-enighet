@@ -84,7 +84,7 @@ export default class Body extends Component {
     }
 
     parse(data) {
-        let parties = Object.keys(data.all_time.data)
+        let parties = Object.keys(data.all_time)
             .map(e => e.split(','))
             .reduce((a, e) => [...a, ...e], [])
 
@@ -103,10 +103,13 @@ export default class Body extends Component {
             })
         });
 
+        const sessions = Object.keys(data.by_session).filter(s => Object.keys(data.by_session[s]).length > 0)
+        const sortedCombos = Object.keys(combos).map(k => combos[k]).sort((a,b) => a.join().localeCompare(b.join()));
+
         return {
             parties,
-            combos: Object.keys(combos).map(k => combos[k]).sort((a,b) => a.join().localeCompare(b.join())),
-            sessions: Object.keys(data.by_session).filter(s => data.by_session[s].total > 0),
+            combos: sortedCombos,
+            sessions,
             allTime: data.all_time,
             bySession: data.by_session
         };

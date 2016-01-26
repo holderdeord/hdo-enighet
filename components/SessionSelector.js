@@ -21,7 +21,7 @@ export default class SessionSelector extends Component {
                 {this.props.sessions.map(session => (
                     <a
                         key={session}
-                        className={classnames("nav-link", {active: session === selected})}
+                        className={classnames('nav-link', {active: session === selected})}
                         href="#"
                         onClick={this.props.onChange.bind(null, session)}
                     >

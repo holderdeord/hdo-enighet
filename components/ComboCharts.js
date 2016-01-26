@@ -20,13 +20,17 @@ export default class ComboCharts extends Component {
 
     renderComboChart([left, right]) {
         const { sessions, bySession } = this.props;
-        const key = [left, right].join(',');
+        const key = [left, right].sort().join(',');
 
         const data = sessions.map(session => {
-            const sessionData = bySession[session];
-            const val = left === right ? 100 : Math.round((sessionData.data[key] / sessionData.total) * 100);
+            const combo = bySession[session][key];
 
-            return [session, val];
+            if (combo) {
+                const val = left === right ? 100 : Math.round((combo.count / combo.total) * 100);    
+                return [session, val];
+            } else {
+                return [session, null];
+            }
         })
         .filter(([session, val]) => val > 0);
 
@@ -35,6 +39,7 @@ export default class ComboCharts extends Component {
                 type: 'spline',
                 backgroundColor: 'transparent',
                 animation: false,
+                height: 200,
                 style: {
                     fontFamily: 'Roboto Slab, Helvetica Neue, Helvetica, sans-serif',
                     width: '100%'
