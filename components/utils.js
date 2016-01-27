@@ -16,7 +16,8 @@ const partyNames = {
     V: 'Venstre',
     MDG: 'Miljøpartiet De Grønne',
     SV: 'Sosialistisk Venstreparti',
-    Sp: 'Senterpartiet'
+    Sp: 'Senterpartiet',
+    FrP: 'Fremskrittspartiet'
 }
 
 export function partyNameFor(party) {

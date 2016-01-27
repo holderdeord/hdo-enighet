@@ -7,9 +7,11 @@ export default class Header extends Component {
             <header>
                 <div className="row">
                     <div className="col-md-2">
-                        <div className="hdo-logo">
-                            <strong>Holder de ord</strong>
-                        </div>
+                        <a href="http://www.holderdeord.no">
+                            <div className="hdo-logo">
+                                <strong>Holder de ord</strong>
+                            </div>
+                        </a>
                     </div>
 
                     <div className="col-md-10 text-sm-right">

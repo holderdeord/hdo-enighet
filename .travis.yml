@@ -3,9 +3,12 @@ language: node_js
 node_js:
 - '0.12'
 script:
-- 'npm test && npm run build'
+- npm test && npm run build
 # after_success:
-# - '[[ "$TRAVIS_BRANCH" = "master" ]]'
+# - '[[ "$TRAVIS_BRANCH" = "master" ]] && npm run deploy'
 notifications:
   email:
-    - jari@holderdeord.no
+  - jari@holderdeord.no
+  hipchat:
+    rooms:
+      secure: L0RdNUzi3ewPNo9Di2wOrq4ZHl4XysUeoG6jTEaHU1rMaAshR1U1POTKAocfPwFtfjtuC9rJJT0MRcFXeWuCsVHcJ1lokKq7Pas+5UfgVrwXT2fl6bPU1uDUzTU1ps5ZZqBcdr3+uVFYhyNEM4NhveHn9fBZlZCrPdBuFc5QXlIwZII0nMUYVMmpqbbYjORzHwjUAbI3N2RckALaru4CEhqlpPShE6QbDZhLiWDhCANqZdMYrdLJoam8f11R5IMoACapl7mqS+NCSW3UCKt0gdPAxnXg+lKUCOHwNVBIWR7VqsD8VZWCaTbGeTb3NJQGnRQ3oXtc53kEOUmqP6WJZOmUHSZL9JCJyGppY2jjV2x5eLYFU6mZBIWTsgu2vSjTpKaE5doOcQhN5czIuY9Ny2MUJHfc6qb3wf+wd1S5/ScS2X/tWlrdKKA5V9BLIKRyksMEwvzeEsYr+1cmnW+rJxGyC41F3R6tPIVC0R4g3ZsWyaLsf/QawMai42c53sAnifoEQHl9ZUhXUdPgKd/W6RN6Nn9IUYBWdWD45chNFyWg+s7XhKQnyJcBW0z1Wodc7dWADTSzR1UHL8VP906cGMMIM+h4lh8CdM1tqPOaq4tyZRjqYS2Fk+rW/EDu8BNn/8k8huZDtNQ4+rxxbyTe9BKPLnlNrFNPYVMyrIiMbI0=

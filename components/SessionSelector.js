@@ -17,18 +17,20 @@ export default class SessionSelector extends Component {
         const { sessions, selected, } = this.props;
 
         return (
-            <nav className="nav nav-inline">
-                {this.props.sessions.map(session => (
-                    <a
-                        key={session}
-                        className={classnames('nav-link', {active: session === selected})}
-                        href="#"
-                        onClick={this.props.onChange.bind(null, session)}
-                    >
-                        {session}
-                    </a>
-                ))}
-            </nav>            
+            <div className="hdo-card-header">
+                <nav className="nav nav-inline">
+                    {this.props.sessions.map(session => (
+                        <a
+                            key={session}
+                            className={classnames('nav-link', {active: session === selected})}
+                            href="#"
+                            onClick={this.props.onChange.bind(null, session)}
+                        >
+                            {session}
+                        </a>
+                    ))}
+                </nav>            
+            </div>
         );
     }
 

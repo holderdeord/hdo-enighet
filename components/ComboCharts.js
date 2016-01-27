@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactHighcharts from 'react-highcharts/bundle/highcharts';
-import { logoFor } from './utils';
+import { logoFor, partyNameFor } from './utils';
 import groupBy from 'lodash.groupby';
 
 export default class ComboCharts extends Component {
@@ -13,7 +13,7 @@ export default class ComboCharts extends Component {
         const lefts = Object.keys(groups).sort((a,b) => a.localeCompare(b));
 
         return (
-            <div className="hdo-card">
+            <div>
                 {lefts.map(left => this.renderGroup(left, groups[left]))}
             </div>
         );
@@ -22,11 +22,11 @@ export default class ComboCharts extends Component {
     renderGroup(left, combos) {
 
         return (
-            <div key={left}>
+            <div key={left} className="hdo-card">
                 <div className="row">
                     <div className="col-md-12">
-                        <div className="m-a-1">
-                            {logoFor(left)}
+                        <div className="hdo-card-header text-sm-center">
+                            <h3>{partyNameFor(left)}</h3>
                         </div>
 
                         <div className="row">
@@ -38,8 +38,6 @@ export default class ComboCharts extends Component {
                         </div>
                     </div>
                 </div>
-
-                <hr />
             </div>
         );
     }

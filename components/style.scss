@@ -13,14 +13,22 @@ body {
 .hdo-card {
   background-color: #fff;
   box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+  margin-top: 2rem;
+
+  .hdo-card-header {
+    background: #fcfcfc;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    box-shadow: 0 1px rgba(0,0,0,.12);
+  }
 }
 
 main {
   @extend .hdo-card;
   margin: 1rem 0;
 }
-
-
 
 .hdo-logo {
   margin-top: 1rem;
