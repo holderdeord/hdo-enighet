@@ -4,6 +4,7 @@ import SessionSelector from './SessionSelector';
 import AgreementTable from './AgreementTable';
 import ComboCharts from './ComboCharts';
 import fetch from 'isomorphic-fetch';
+import Spinner from 'react-spinkit';
 
 const PARTY_ORDER = [
     'SV',
@@ -57,7 +58,11 @@ export default class Body extends Component {
 
     render() {
         if (!this.state.data) {
-            return null;
+            return (
+                <div className="spinner">
+                    <Spinner spinnerName="three-bounce" noFadeIn />
+                </div>
+            );
         }
 
         return (

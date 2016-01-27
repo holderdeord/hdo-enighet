@@ -25,6 +25,11 @@ body {
   }
 }
 
+.spinner {
+  width: 60px;
+  margin: 0 auto;
+}
+
 main {
   @extend .hdo-card;
   margin: 1rem 0;

@@ -3,8 +3,8 @@ var webpack = require('webpack');
 module.exports = {
     entry: './components/App.js',
     output: {
-      path: './build',
-      filename: 'bundle.js'
+        path: './build',
+        filename: 'bundle.js'
     },
 
     plugins: [
@@ -17,7 +17,8 @@ module.exports = {
 
     module: {
         loaders: [
-            { test: /\.scss$/, loader: "style!css!sass" },
+            { test: /\.scss$/, loader: 'style!css!sass' },
+            { test: /\.css$/, loader: 'style!css' },
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
