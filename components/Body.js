@@ -28,7 +28,7 @@ export default class Body extends Component {
     componentDidMount() {
         const url = 'agreement.json'
 
-        fetch(url)
+        fetch(url, {credentials: 'same-origin'})
             .then(res => res.json())
             .then(data => this.setState({data: this.parse(data)}, ::this.createTimer))
     }
