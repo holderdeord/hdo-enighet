@@ -9,35 +9,30 @@ export default class ComboCharts extends Component {
     }
 
     render() {
-        const groups = groupBy(this.props.combos, ([left, right]) => left)
-        const lefts = Object.keys(groups).sort((a,b) => a.localeCompare(b));
-
         return (
-            <div>
-                {lefts.map(left => this.renderGroup(left, groups[left]))}
+            <div className="hdo-card">
+                <div className="hdo-card-header text-md-center">
+                    <h3>Historikk</h3>
+                </div>
+
+                {this.props.combos.map(combo => this.renderCombo(combo))}
             </div>
-        );
+        )
     }
 
-    renderGroup(left, combos) {
-
+    renderCombo([left, right]) {
         return (
-            <div key={left} className="hdo-card">
+            <div key={left+right} id={`${left}-v-${right}`}>
                 <div className="row">
-                    <div className="col-md-12">
-                        <div className="hdo-card-header text-sm-center">
-                            <h3>{partyNameFor(left)}</h3>
-                        </div>
+                    <div className="col-md-6 text-sm-center" style={{paddingTop: '3rem'}}>
+                        <h4>{logoFor(left)} v. {logoFor(right)}</h4>
+                    </div>
 
-                        <div className="row">
-                            {
-                                combos
-                                    .sort((a, b) => a[1].localeCompare(b[1]))
-                                    .map(combo => this.renderComboChart(combo))
-                            }
-                        </div>
+                    <div className="col-md-6 text-sm-center">
+                        {this.renderComboChart([left, right])}
                     </div>
                 </div>
+                <hr />
             </div>
         );
     }
@@ -50,7 +45,7 @@ export default class ComboCharts extends Component {
             const combo = bySession[session][key];
 
             if (combo) {
-                const val = left === right ? 100 : Math.round((combo.count / combo.total) * 100);    
+                const val = left === right ? 100 : Math.round((combo.count / combo.total) * 100);
                 return [session, val];
             } else {
                 return [session, null];
@@ -75,8 +70,8 @@ export default class ComboCharts extends Component {
                 enabled: false,
             },
 
-            legend: { 
-                enabled: false 
+            legend: {
+                enabled: false
             },
 
             xAxis: {
@@ -87,8 +82,8 @@ export default class ComboCharts extends Component {
                 min: 0,
                 max: 100,
                 title: { enabled: false },
-                labels: { 
-                    format: '{value}%' 
+                labels: {
+                    format: '{value}%'
                 }
             },
 
@@ -99,20 +94,15 @@ export default class ComboCharts extends Component {
             series: [
                 {
                     name: 'Prosent enighet',
-                    data, 
+                    data,
                     color: '#566f7c',
-                    width: 4
+                    width: 1
                 }
             ]
         };
 
         return (
-            <div key={left+right} className={`col-md-6 col-sm-12 text-md-center`} id={`${left}-v-${right}`}>
-                <div className="m-a-1">
-                    <h4>{logoFor(right)}</h4>
-                    <ReactHighcharts config={config} isPureConfig />
-                </div>
-            </div>
+            <ReactHighcharts config={config} isPureConfig />
         );
     }
 }

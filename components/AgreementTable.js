@@ -44,48 +44,45 @@ export default class AgreementTable extends Component {
 
     renderComparison(left, right, rowIndex, colIndex) {
         const key = [left,right].sort().join(',');
-        const { selectedSession, sessions, bySession } = this.props;
+        const {
+            selectedSession,
+            sessions,
+            bySession,
+            allTime
+        } = this.props;
 
         if (left == right) {
             return <td key={key} className="hdo-pattern diagonal" />;
         }
 
-        // if (rowIndex > colIndex) {
-        //     return <td key={key}/>;
-        // }
+        let combo;
 
-        if (selectedSession === 'Alle') {
-            const values = sessions.map(session => {
-                const sessionData = bySession[session];
-                return left === right ? 100 : Math.round((sessionData[key].count / sessionData[key].total) * 100);
-            });
-
-            return <td key={key}><Sparkline width={50} height={20} data={values} /></td>;
+        if (this.props.selectedSession === 'all') {
+            combo = allTime[key];
         } else {
-            let combo = bySession[this.props.selectedSession][key];
-            let val = 0;
-            let title = '';
-
-            if (combo) {
-                val = Math.round((combo.count / combo.total) * 100);
-                title = `${combo.count} / ${combo.total} voteringsforslag`;
-            } 
-
-            return (
-                <Motion key={key} defaultStyle={{val: 0}} style={{val: spring(val)}}>
-                    {value => <td
-                        title={title}
-                        className="text-center"
-                        style={{backgroundColor: scale(value.val)}}>
-                            <a href={`#${[left,right].sort().join('-v-')}`}>{value.val === 0 ? '' : `${Math.round(value.val)}%`}</a>
-                        </td>
-                    }
-                </Motion>
-            );
-
+            combo = bySession[this.props.selectedSession][key];
         }
-    }
 
+        let val = 0;
+        let title = '';
+
+        if (combo) {
+            val = Math.round((combo.count / combo.total) * 100);
+            title = `${combo.count} / ${combo.total} voteringsforslag`;
+        }
+
+        return (
+            <Motion key={key} defaultStyle={{val: 0}} style={{val: spring(val)}}>
+                {value => <td
+                    title={title}
+                    className="text-center"
+                    style={{backgroundColor: scale(value.val)}}>
+                        <a href={`#${[left,right].sort().join('-v-')}`}>{value.val === 0 ? '' : `${Math.round(value.val)}%`}</a>
+                    </td>
+                }
+            </Motion>
+        );
+    }
 }
 
 

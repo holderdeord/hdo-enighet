@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "bundle.js",
   "scripts": {
-    "fetch-data": "curl https://www.holderdeord.no/data/agreement.json -O",
+    "fetch-data": "curl https://www.holderdeord.no/data/agreement.json -o public/agreement.json",
     "dev": "node server/dev-server.js",
     "lint": "eslint components",
-    "build": "webpack --bail --optimize-minimize --optimize-occurence-order --optimize-dedupe && cp index.html build/",
+    "build": "webpack --bail --optimize-minimize --optimize-occurence-order --optimize-dedupe && cp -R $(ls public/* | grep -v agreement.json | xargs) build/",
     "deploy": "npm run build && scp -r build/* hdo@hdo02.holderdeord.no:/webapps/files/prototyper/enighet",
     "test": "npm run lint"
   },

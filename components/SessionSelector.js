@@ -29,7 +29,7 @@ export default class SessionSelector extends Component {
                             {session}
                         </a>
                     ))}
-                </nav>            
+                </nav>
             </div>
         );
     }
@@ -38,13 +38,17 @@ export default class SessionSelector extends Component {
         const { sessions, selected } = this.props;
 
         return (
-            <select value={selected} onChange={(e) => this.props.onChange(e.target.value)}>
-                {this.props.sessions.map(session => (
-                    <option key={session}>
-                        {session}
-                    </option>
-                ))}
-            </select>
+            <div className="p-t-2 p-b-1">
+                <select className="custom-select"
+                        value={selected}
+                        onChange={(e) => this.props.onChange(e.target.value)}>
+                    {this.props.sessions.map(session => (
+                        <option key={session} value={session}>
+                            {session === 'all' ? 'Alle sesjoner' : session}
+                        </option>
+                    ))}
+                </select>
+            </div>
         )
     }
 }

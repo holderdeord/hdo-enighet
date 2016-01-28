@@ -21,7 +21,7 @@ export default class Body extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedSession: '2015-2016'
+            selectedSession: 'all'
         };
     }
 
@@ -30,30 +30,7 @@ export default class Body extends Component {
 
         fetch(url, {credentials: 'same-origin'})
             .then(res => res.json())
-            .then(data => this.setState({data: this.parse(data)}, ::this.createTimer))
-    }
-
-    createTimer() {
-        this.interval = setInterval(() => {
-            let current = this.state.data.sessions.indexOf(this.state.selectedSession);
-
-            if (current == this.state.data.sessions.length - 1) {
-                current = -1;
-            }
-
-            this.setState({selectedSession: this.state.data.sessions[current + 1]});
-        }, 3000);
-    }
-
-    stopTimer() {
-        if (this.interval) {
-            clearInterval(this.interval);
-            this.interval = null;
-        }
-    }
-
-    componentWillUnmount() {
-        stopTimer();
+            .then(data => this.setState({data: this.parse(data)}))
     }
 
     render() {
@@ -67,12 +44,13 @@ export default class Body extends Component {
 
         return (
             <div>
-                <main>
                     <SessionSelector
-                        sessions={[...this.state.data.sessions]}
+                        type='select'
+                        sessions={['all', ...this.state.data.sessions]}
                         selected={this.state.selectedSession}
                         onChange={::this.handleSessionChange} />
 
+                <main>
                     <AgreementTable
                         selectedSession={this.state.selectedSession}
                         {...this.state.data} />
@@ -84,7 +62,6 @@ export default class Body extends Component {
     }
 
     handleSessionChange(session) {
-        this.stopTimer();
         this.setState({selectedSession: session});
     }
 

@@ -1,12 +1,9 @@
+$dark-background-color: #fcfcfc;
+
 header h1 {
   font-size: 2rem;
   padding-top: 2rem;
-  font-weight: 300;  
-}
-
-body {
-  color: #333;
-  background-color: #fafafa;
+  font-weight: 300;
 }
 
 
@@ -16,7 +13,7 @@ body {
   margin-top: 2rem;
 
   .hdo-card-header {
-    background: #fcfcfc;
+    background: $dark-background-color;
     margin-left: 0;
     margin-right: 0;
     padding-top: 1rem;
