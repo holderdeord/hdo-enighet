@@ -47,7 +47,7 @@ export default class AgreementTable extends Component {
         const { selectedSession, sessions, bySession } = this.props;
 
         if (left == right) {
-            return <td key={key} className="diagonal" />;
+            return <td key={key} className="hdo-pattern diagonal" />;
         }
 
         // if (rowIndex > colIndex) {

@@ -30,6 +30,11 @@ body {
   margin: 0 auto;
 }
 
+.diagonal {
+  background-color: #fafafa;
+  background-size: 7px;
+}
+
 main {
   @extend .hdo-card;
   margin: 1rem 0;
