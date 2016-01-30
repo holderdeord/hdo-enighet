@@ -1,11 +1,18 @@
 $dark-background-color: #fcfcfc;
 
+body {
+}
+
 button {
   outline: none !important;
 }
 
+h1 {
+  font-weight: 300;
+}
+
 header {
-   h1 {
+  h1 {
     font-size: 2rem;
     padding-top: 2rem;
     font-weight: 300;
@@ -18,16 +25,27 @@ header {
 
 .hdo-card {
   background-color: #fff;
-  box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+  // box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   margin-top: 2rem;
 
   .hdo-card-header {
-    background: $dark-background-color;
+    background-color: $dark-background-color;
     margin-left: 0;
     margin-right: 0;
     padding-top: 1rem;
     padding-bottom: 1rem;
     box-shadow: 0 1px rgba(0,0,0,.12);
+
+    $border-color: #ddd;
+
+    &.top-border {
+      border-top: 1px solid $border-color;
+    }
+
+    &.bottom-border {
+      border-bottom: 1px solid $border-color;
+    }
   }
 }
 
@@ -52,6 +70,12 @@ main {
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: auto 2.5rem;
+
+  @media screen and (max-width: 385px) {
+    text-align: center;
+    background-position: 50% 0;
+  }
+
 }
 
 a {
@@ -66,14 +90,23 @@ html ::selection {
     background-color: #fadd00;
 }
 
+@media screen and (max-width: 385px) {
+  mark {
+    line-height: 3rem;
+  }
+}
+
 .table {
   color: #333;
   font-size: 1.3rem;
   font-weight: 300;
+  border-bottom: 1px solid #eceeef;
+  margin-bottom: 0;
 
   th, td {
     text-align: center;
     vertical-align: middle;
+    border-top: none;
   }
 
   a {
@@ -89,12 +122,10 @@ html ::selection {
     font-weight: 600;
   }
 
-  th {
-  }
-
   th.highlight {
     background-color: #efefef;
-    filter: grayscale(1.0);
+    filter: none;
+    opacity: 1;
   }
 }
 
@@ -126,7 +157,7 @@ footer {
   .links {
     padding-top: 1rem;
 
-    a { 
+    a {
       text-decoration: none;
     }
   }

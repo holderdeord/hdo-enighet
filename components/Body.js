@@ -53,14 +53,14 @@ export default class Body extends Component {
         return (
             <div>
                 <main>
+                    <AgreementTable
+                        selectedSession={selectedSession}
+                        {...data} />
+
                     <SessionSelector
                         sessions={['all', ...sessions]}
                         selected={selectedSession}
                         onChange={::this.handleSessionChange} />
-
-                    <AgreementTable
-                        selectedSession={selectedSession}
-                        {...data} />
                 </main>
 
                 <ComboCharts {...data} />

@@ -17,12 +17,12 @@ export default class SessionSelector extends Component {
         const { sessions, selected, } = this.props;
 
         return (
-            <div className="hdo-card-header" style={{marginLeft: '1rem'}}>
+            <div className="hdo-card-header top-border">
                 <div className="btn-toolbar" role="toolbar" aria-label="Stortingssesjoner">
                     <div className="btn-group btn-group-sm" role="group" aria-label="First group">
                         {this.props.sessions.map(session => (
-                            <button key={session} 
-                                    type="button" 
+                            <button key={session}
+                                    type="button"
                                     onClick={this.props.onChange.bind(null, session)}
                                     className={classnames('btn', 'btn-secondary', {active: session === selected})}>
                                         {session === 'all' ? 'Alle sesjoner' : session}

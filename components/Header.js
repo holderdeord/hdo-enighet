@@ -13,7 +13,7 @@ export default class Header extends Component {
                         </a>
                     </div>
 
-                    <div className="col-md-8 text-sm-right">
+                    <div className="col-md-8 text-xs-center text-sm-right">
                         <h1>Hvem <mark>stemmer sammen</mark> på Stortinget?</h1>
                     </div>
                 </div>

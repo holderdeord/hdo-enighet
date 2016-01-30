@@ -5,11 +5,13 @@ import Sparkline from './Sparkline';
 import { logoFor } from './utils';
 import cn from 'classnames';
 
+console.log(presets.stiff);
+
 const scale = d3.scale
     .linear()
     .domain([0, 1, 50, 100])
     // .range(['#B41917', '#1E6419']);
-    .range(['white', '#dd0000', 'white', '#31a354']);
+    .range(['white', '#dd0000', 'white', '#106E0E']);
 
 export default class AgreementTable extends Component {
     constructor(props) {
@@ -22,14 +24,14 @@ export default class AgreementTable extends Component {
             parties,
         } = this.props;
 
-        const { 
-            left: highlightLeft, 
-            right: highlightRight 
+        const {
+            left: highlightLeft,
+            right: highlightRight
         } = this.state.comboHighlight;
 
         return (
             <div className="table-responsive">
-                <table className="table table-bordered table-sm">
+                <table className="table table-sm">
                     <thead>
                         <tr>
                             <th className="diagonal" />
@@ -86,7 +88,7 @@ export default class AgreementTable extends Component {
         }
 
         return (
-            <Motion key={key} defaultStyle={{val: 0}} style={{val: spring(val, presets.stiff)}}>
+            <Motion key={key} defaultStyle={{val: 0}} style={{val: spring(val, [300, 50])}}>
                 {value => (
                     <td
                         title={title}
@@ -94,7 +96,7 @@ export default class AgreementTable extends Component {
                         onMouseOver={this.setComboHighlight.bind(this, left, right)}
                         onMouseOut={this.setComboHighlight.bind(this, null, null)}
                         className={cn('text-center', 'clickable', {highlight, diagonal: value.val === 0})}
-                        style={{backgroundColor: scale(value.val)}}>
+                        style={{backgroundColor: scale(value.val), color: (value.val > 80 || value.val < 20) ? '#eee' : 'inherit'}}>
                             {value.val === 0 ? '' : `${Math.round(value.val)}%`}
                     </td>
                 )}
