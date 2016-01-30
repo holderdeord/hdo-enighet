@@ -1,5 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
+var autoprefixer = require('autoprefixer');
+var precss = require('precss');
 
 module.exports = {
     devtool: 'source-map',
@@ -14,6 +16,7 @@ module.exports = {
         publicPath: '/'
     },
     plugins: [
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /nb$/),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
@@ -23,8 +26,8 @@ module.exports = {
     ],
     module: {
         loaders: [
-            { test: /\.scss$/, loader: 'style!css!sass' },
-            { test: /\.css$/, loader: 'style!css' },
+            { test: /\.scss$/, loader: 'style!css!postcss!sass' },
+            { test: /\.css$/, loader: 'style!css!postcss' },
             {
                 test: /\.js$/,
                 loaders: ['react-hot', 'babel'],
@@ -33,5 +36,8 @@ module.exports = {
                 ]
             }
         ]
+    },
+    postcss: function() {
+        return [autoprefixer, precss];
     }
 };

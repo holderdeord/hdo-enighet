@@ -1,4 +1,6 @@
 var webpack = require('webpack');
+var autoprefixer = require('autoprefixer');
+var precss = require('precss');
 
 module.exports = {
     entry: './components/App.js',
@@ -8,17 +10,18 @@ module.exports = {
     },
 
     plugins: [
+        new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /nb$/),
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify('production')
             }
-        })
+        })        
     ],
 
     module: {
         loaders: [
-            { test: /\.scss$/, loader: 'style!css!sass' },
-            { test: /\.css$/, loader: 'style!css' },
+        { test: /\.scss$/, loader: 'style!css!postcss!sass' },
+        { test: /\.css$/, loader: 'style!css!postcss' },
             {
                 test: /\.js$/,
                 loader: 'babel-loader',
@@ -29,4 +32,8 @@ module.exports = {
             }
         ]
     },
+
+    postcss: function() {
+        return [autoprefixer, precss];
+    }
 };

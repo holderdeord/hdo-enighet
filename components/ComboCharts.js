@@ -11,7 +11,7 @@ export default class ComboCharts extends Component {
     render() {
         return (
             <div className="hdo-card">
-                <div className="hdo-card-header text-md-center">
+                <div className="hdo-card-header text-xs-center">
                     <h3>Historikk</h3>
                 </div>
 

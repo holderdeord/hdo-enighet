@@ -1,11 +1,20 @@
 $dark-background-color: #fcfcfc;
 
-header h1 {
-  font-size: 2rem;
-  padding-top: 2rem;
-  font-weight: 300;
+button {
+  outline: none !important;
 }
 
+header {
+   h1 {
+    font-size: 2rem;
+    padding-top: 2rem;
+    font-weight: 300;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
 
 .hdo-card {
   background-color: #fff;
@@ -27,14 +36,13 @@ header h1 {
   margin: 0 auto;
 }
 
-.diagonal {
-  background-color: #fafafa;
-  background-size: 7px;
-}
-
 main {
   @extend .hdo-card;
   margin: 1rem 0;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 .hdo-logo {
@@ -48,10 +56,9 @@ main {
 
 a {
   color: inherit;
-  text-decoration: none;
+  text-decoration: underline;
 
   &:active, &:hover {
-    text-decoration: underline;
   }
 }
 
@@ -62,33 +69,45 @@ html ::selection {
 .table {
   color: #333;
   font-size: 1.3rem;
+  font-weight: 300;
 
   th, td {
     text-align: center;
     vertical-align: middle;
   }
 
-  .diagonal {
+  a {
+    text-decoration: none;
+  }
 
+  .diagonal {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAIAAABvrngfAAAAK0lEQVQImWM4c+bMf1TA+P//fwYkcPbsWQZkeYgOBjQ+QgjZRAY0/v///wEsaFwPg05jgQAAAABJRU5ErkJggg==");
+  }
+
+  td:hover, td a:hover {
+    color: inherit;
+    font-weight: 600;
+  }
+
+  th {
+  }
+
+  th.highlight {
+    background-color: #efefef;
+    filter: grayscale(1.0);
+  }
+}
+
+.session-selector {
+  text-align: center;
+
+  .btn-group {
+    float: none;
   }
 }
 
 .nav {
   text-align: center;
-
-  .nav-link {
-    padding: .8rem;
-    border: 1px solid transparent;
-
-    &:hover {
-      text-decoration: underline;
-    }
-
-    &.active {
-      text-decoration: underline;
-      font-weight: 600;
-    }
-  }
 }
 
 .sparkline {
@@ -103,4 +122,16 @@ footer {
   margin: 4rem 0;
   text-align: center;
   opacity: 0.8;
+
+  .links {
+    padding-top: 1rem;
+
+    a { 
+      text-decoration: none;
+    }
+  }
+}
+
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
 }

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import SessionSelector from './SessionSelector';
 import AgreementTable from './AgreementTable';
 import ComboCharts from './ComboCharts';
+import Explanation from './Explanation';
 import fetch from 'isomorphic-fetch';
 import Spinner from 'react-spinkit';
 
@@ -21,7 +22,8 @@ export default class Body extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedSession: 'all'
+            selectedSession: 'all',
+            showExplanation: false
         };
     }
 
@@ -42,21 +44,28 @@ export default class Body extends Component {
             );
         }
 
+        const {
+            data: { sessions, currentSession, lastUpdate},
+            data,
+            selectedSession,
+        } = this.state;
+
         return (
             <div>
+                <main>
                     <SessionSelector
-                        type='select'
-                        sessions={['all', ...this.state.data.sessions]}
-                        selected={this.state.selectedSession}
+                        sessions={['all', ...sessions]}
+                        selected={selectedSession}
                         onChange={::this.handleSessionChange} />
 
-                <main>
                     <AgreementTable
-                        selectedSession={this.state.selectedSession}
-                        {...this.state.data} />
+                        selectedSession={selectedSession}
+                        {...data} />
                 </main>
 
-                <ComboCharts {...this.state.data} />
+                <ComboCharts {...data} />
+
+                <Explanation currentSession={currentSession} lastUpdate={lastUpdate}/>
             </div>
         );
     }
@@ -93,7 +102,9 @@ export default class Body extends Component {
             combos: sortedCombos,
             sessions,
             allTime: data.all_time,
-            bySession: data.by_session
+            bySession: data.by_session,
+            currentSession: data.current_session,
+            lastUpdate: data.last_update
         };
     }
 }

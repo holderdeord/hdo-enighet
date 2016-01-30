@@ -7,29 +7,29 @@ export default class SessionSelector extends Component {
         const { type } = this.props;
 
         return (
-            <div className="session-selector text-center">
-                {type === 'select' ? this.renderSelect() : this.renderNav()}
+            <div className="session-selector">
+                {type === 'select' ? this.renderSelect() : this.renderToolbar()}
             </div>
         )
     }
 
-    renderNav() {
+    renderToolbar() {
         const { sessions, selected, } = this.props;
 
         return (
-            <div className="hdo-card-header">
-                <nav className="nav nav-inline">
-                    {this.props.sessions.map(session => (
-                        <a
-                            key={session}
-                            className={classnames('nav-link', {active: session === selected})}
-                            href="#"
-                            onClick={this.props.onChange.bind(null, session)}
-                        >
-                            {session}
-                        </a>
-                    ))}
-                </nav>
+            <div className="hdo-card-header" style={{marginLeft: '1rem'}}>
+                <div className="btn-toolbar" role="toolbar" aria-label="Stortingssesjoner">
+                    <div className="btn-group btn-group-sm" role="group" aria-label="First group">
+                        {this.props.sessions.map(session => (
+                            <button key={session} 
+                                    type="button" 
+                                    onClick={this.props.onChange.bind(null, session)}
+                                    className={classnames('btn', 'btn-secondary', {active: session === selected})}>
+                                        {session === 'all' ? 'Alle sesjoner' : session}
+                                </button>
+                        ))}
+                    </div>
+                </div>
             </div>
         );
     }

@@ -1,49 +1,63 @@
 import React, { Component } from 'react';
-import { Motion, spring } from 'react-motion';
+import { Motion, spring, presets } from 'react-motion';
 import d3 from 'd3';
 import Sparkline from './Sparkline';
 import { logoFor } from './utils';
+import cn from 'classnames';
 
 const scale = d3.scale
     .linear()
     .domain([0, 1, 50, 100])
     // .range(['#B41917', '#1E6419']);
-    .range(['white', '#de2d26', 'lightgray', '#31a354']);
+    .range(['white', '#dd0000', 'white', '#31a354']);
 
 export default class AgreementTable extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {comboHighlight: {}}
+    }
 
     render() {
         const {
             parties,
         } = this.props;
 
-        return (
-            <table className="table table-condensed">
-                <thead>
-                    <tr>
-                        <th></th>
-                        {parties.map(p => <th key={p}>{logoFor(p)}</th>)}
-                    </tr>
-                </thead>
+        const { 
+            left: highlightLeft, 
+            right: highlightRight 
+        } = this.state.comboHighlight;
 
-                <tbody>
-                    {parties.map((party, rowIndex) => (
-                        <tr key={party}>
-                            <th>{logoFor(party)}</th>
-                            {
-                                parties.map((otherParty, colIndex) =>
-                                    this.renderComparison(party, otherParty, rowIndex, colIndex)
-                                )
-                            }
+        return (
+            <div className="table-responsive">
+                <table className="table table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th className="diagonal" />
+                            {parties.map(p => <th key={p} className={cn({highlight: p === highlightRight})} >{logoFor(p)}</th>)}
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+
+                    <tbody>
+                        {parties.map((party, rowIndex) => (
+                            <tr key={party}>
+                                <th className={cn({highlight: party === highlightLeft})}>{logoFor(party)}</th>
+                                {
+                                    parties.map((otherParty, colIndex) =>
+                                        this.renderComparison(party, otherParty, rowIndex, colIndex)
+                                    )
+                                }
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
           );
     }
 
     renderComparison(left, right, rowIndex, colIndex) {
         const key = [left,right].sort().join(',');
+        const highlight = this.state.comboHighlight.left == left || this.state.comboHighlight.right === right;
+
         const {
             selectedSession,
             sessions,
@@ -52,7 +66,7 @@ export default class AgreementTable extends Component {
         } = this.props;
 
         if (left == right) {
-            return <td key={key} className="hdo-pattern diagonal" />;
+            return <td key={key} className="diagonal" />;
         }
 
         let combo;
@@ -68,20 +82,32 @@ export default class AgreementTable extends Component {
 
         if (combo) {
             val = Math.round((combo.count / combo.total) * 100);
-            title = `${combo.count} / ${combo.total} voteringsforslag`;
+            title = `${left} v. ${right}: ${combo.count} / ${combo.total} voteringsforslag`;
         }
 
         return (
-            <Motion key={key} defaultStyle={{val: 0}} style={{val: spring(val)}}>
-                {value => <td
-                    title={title}
-                    className="text-center"
-                    style={{backgroundColor: scale(value.val)}}>
-                        <a href={`#${[left,right].sort().join('-v-')}`}>{value.val === 0 ? '' : `${Math.round(value.val)}%`}</a>
+            <Motion key={key} defaultStyle={{val: 0}} style={{val: spring(val, presets.stiff)}}>
+                {value => (
+                    <td
+                        title={title}
+                        onClick={this.setHash.bind(null, [left,right].sort().join('-v-'))}
+                        onMouseOver={this.setComboHighlight.bind(this, left, right)}
+                        onMouseOut={this.setComboHighlight.bind(this, null, null)}
+                        className={cn('text-center', 'clickable', {highlight, diagonal: value.val === 0})}
+                        style={{backgroundColor: scale(value.val)}}>
+                            {value.val === 0 ? '' : `${Math.round(value.val)}%`}
                     </td>
-                }
+                )}
             </Motion>
         );
+    }
+
+    setHash(hash) {
+        window.location.hash = hash;
+    }
+
+    setComboHighlight(left, right) {
+        this.setState({comboHighlight: {left, right}})
     }
 }
 
