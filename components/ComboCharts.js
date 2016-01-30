@@ -24,12 +24,12 @@ export default class ComboCharts extends Component {
         return (
             <div key={left+right} id={`${left}-v-${right}`}>
                 <div className="row">
-                    <div className="col-md-6 text-sm-center" style={{paddingTop: '3rem'}}>
+                    <div className="col-md-12 text-xs-center">
                         <h4>{logoFor(left)} v. {logoFor(right)}</h4>
-                    </div>
 
-                    <div className="col-md-6 text-sm-center">
-                        {this.renderComboChart([left, right])}
+                        <div>
+                            {this.renderComboChart([left, right])}
+                        </div>
                     </div>
                 </div>
                 <hr />
@@ -58,7 +58,7 @@ export default class ComboCharts extends Component {
                 type: 'spline',
                 backgroundColor: 'transparent',
                 animation: false,
-                height: 200,
+                height: 380,
                 style: {
                     fontFamily: 'Roboto Slab, Helvetica Neue, Helvetica, sans-serif',
                     width: '100%'

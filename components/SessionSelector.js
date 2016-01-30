@@ -4,11 +4,15 @@ import classnames from 'classnames';
 
 export default class SessionSelector extends Component {
     render() {
-        const { type } = this.props;
-
         return (
             <div className="session-selector">
-                {type === 'select' ? this.renderSelect() : this.renderToolbar()}
+                <div className="hidden-xs-down">
+                    {this.renderToolbar()}
+                </div>
+
+                <div className="hidden-sm-up">
+                    {this.renderSelect()}
+                </div>
             </div>
         )
     }
@@ -17,18 +21,16 @@ export default class SessionSelector extends Component {
         const { sessions, selected, } = this.props;
 
         return (
-            <div className="hdo-card-header top-border">
-                <div className="btn-toolbar" role="toolbar" aria-label="Stortingssesjoner">
-                    <div className="btn-group btn-group-sm" role="group" aria-label="First group">
-                        {this.props.sessions.map(session => (
-                            <button key={session}
-                                    type="button"
-                                    onClick={this.props.onChange.bind(null, session)}
-                                    className={classnames('btn', 'btn-secondary', {active: session === selected})}>
-                                        {session === 'all' ? 'Alle sesjoner' : session}
-                                </button>
-                        ))}
-                    </div>
+            <div className="hdo-card-header">
+                <div className="btn-group btn-group-sm" role="group">
+                    {this.props.sessions.map(session => (
+                        <button key={session}
+                                type="button"
+                                onClick={this.props.onChange.bind(null, session)}
+                                className={classnames('btn', 'btn-secondary', {active: session === selected})}>
+                                    {session === 'all' ? 'Alle sesjoner' : session}
+                            </button>
+                    ))}
                 </div>
             </div>
         );

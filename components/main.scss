@@ -11,11 +11,17 @@ h1 {
   font-weight: 300;
 }
 
+
 header {
   h1 {
     font-size: 2rem;
     padding-top: 2rem;
     font-weight: 300;
+
+    @media (max-width: 385px) {
+      padding-top: 0;
+      font-size: 1.5rem;
+    }
   }
 
   a {
@@ -127,12 +133,33 @@ html ::selection {
     filter: none;
     opacity: 1;
   }
+
+  .party-logo {
+    width: 52px;
+  }
+
+
+  @media (max-width: 380px) {
+    font-size: .9rem;
+
+    .party-logo {
+      width: 26px;
+    }
+  }
+
 }
+
+.party-logo {
+  width: 96px;
+}
+
+
 
 .session-selector {
   text-align: center;
 
   .btn-group {
+    margin-left: 2rem;
     float: none;
   }
 }

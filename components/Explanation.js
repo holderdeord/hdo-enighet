@@ -6,13 +6,13 @@ moment.locale('nb');
 export default (props) => (
     <div className="hdo-card">
         <div className="hdo-card-header text-lg-center p-a-2">
-            <h3>Hvordan har dere regnet ut dette?</h3>
+            <h3>Om utregningen</h3>
         </div>
 
         <div className="row p-a-2">
             <div className="col-lg-4 col-md-12">
                 <p>
-                    Oversikten er basert på <a href="https://www.holderdeord.no">Holder de ords</a> database over avstemninger og forslag på Stortinget fra 2009 og til i dag.
+                    Oversikten er basert på <a href="https://www.holderdeord.no">Holder de ord</a>s database over avstemninger og forslag på Stortinget fra 2009 og til i dag.
                 </p>
 
                 <p>
