@@ -83,7 +83,7 @@ export default class AgreementTable extends Component {
         }
 
         return (
-            <Motion key={key} defaultStyle={{val: 50}} style={{val: spring(val, [300, 50])}}>
+            <Motion key={key} defaultStyle={{val: val}} style={{val: spring(val, [300, 50])}}>
                 {value => (
                     <td
                         title={title}

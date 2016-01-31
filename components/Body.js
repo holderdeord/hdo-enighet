@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import fetch from 'isomorphic-fetch';
+import Spinner from 'react-spinkit';
 
 import SessionSelector from './SessionSelector';
 import AgreementTable from './AgreementTable';
 import ComboCharts from './ComboCharts';
 import Explanation from './Explanation';
-import fetch from 'isomorphic-fetch';
-import Spinner from 'react-spinkit';
-import OtherServices from './OtherServices';
+import RelatedServices from './RelatedServices';
 
 const PARTY_ORDER = [
     'SV',
@@ -37,7 +37,7 @@ export default class Body extends Component {
         if (!this.state.data) {
             return (
                 <div className="spinner">
-                    <Spinner spinnerName="three-bounce" noFadeIn />
+                    <Spinner spinnerName="three-bounce" />
                 </div>
             );
         }
@@ -63,7 +63,7 @@ export default class Body extends Component {
 
                 <ComboCharts {...data} />
                 <Explanation currentSession={currentSession} lastUpdate={lastUpdate}/>
-                <OtherServices />
+                <RelatedServices />
             </div>
         );
     }

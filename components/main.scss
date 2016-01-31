@@ -86,22 +86,22 @@ main {
   background-repeat: no-repeat;
   background-size: auto 2.5rem;
 
-  @media screen and (max-width: 48em) {    
+  @media screen and (max-width: 48em) {
     text-align: center;
     background-position: 50% 0;
   }
 }
 
-.other-services { 
+.other-services {
   a {
     text-decoration: none;
   }
 
   .service {
     filter: grayscale(0.4);
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 
-    .img {      
+    .img {
       background-repeat: no-repeat;
       background-size: cover;
       height: 200px;
@@ -110,6 +110,8 @@ main {
 
     &:hover {
       filter: none;
+      background-color: lighten(#b8bfcc, 15%);
+      // a { color: #eee; }
     }
   }
 }
@@ -217,4 +219,39 @@ footer {
 .row.no-gutters > [class*=" col-"] {
   padding-right: 0;
   padding-left: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 200%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.fadeInUp {
+  animation-name: fadeInUp;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+.fadeInDown {
+  animation-name: fadeInDown;
+  animation-duration: 1s;
+  animation-fill-mode: both;
 }

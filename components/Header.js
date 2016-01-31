@@ -14,7 +14,7 @@ export default class Header extends Component {
                         </a>
                     </div>
 
-                    <div className="col-md-8 text-xs-center">
+                    <div className="col-md-8 text-xs-center fadeInDown">
                         <h1>Hvem <mark>stemmer sammen</mark> på Stortinget?</h1>
                     </div>
 
