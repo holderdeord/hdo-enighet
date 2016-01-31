@@ -28,6 +28,7 @@ module.exports = {
         loaders: [
             { test: /\.scss$/, loader: 'style!css!postcss!sass' },
             { test: /\.css$/, loader: 'style!css!postcss' },
+            { test: /\.(ttf|eot|otf|svg|woff|woff2)(\?.+)?$/, loader: 'url-loader?limit=10000' },
             {
                 test: /\.js$/,
                 loaders: ['react-hot', 'babel'],

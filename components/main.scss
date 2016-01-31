@@ -11,7 +11,6 @@ h1 {
   font-weight: 300;
 }
 
-
 header {
   h1 {
     font-size: 2rem;
@@ -21,6 +20,17 @@ header {
     @media (max-width: 385px) {
       padding-top: 0;
       font-size: 1.5rem;
+    }
+  }
+
+  .sharing-links {
+    padding-top: 2.5rem;
+    color: #455068;
+    span { padding-left: 1rem; }
+
+    @media screen and (max-width: 48em) {
+      padding-top: 0;
+      text-align: center;
     }
   }
 
@@ -76,11 +86,32 @@ main {
   background-repeat: no-repeat;
   background-size: auto 2.5rem;
 
-  @media screen and (max-width: 385px) {
+  @media screen and (max-width: 48em) {    
     text-align: center;
     background-position: 50% 0;
   }
+}
 
+.other-services { 
+  a {
+    text-decoration: none;
+  }
+
+  .service {
+    filter: grayscale(0.4);
+    transition: all 0.2s ease;
+
+    .img {      
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 200px;
+      background-position: 50% 50%;
+    }
+
+    &:hover {
+      filter: none;
+    }
+  }
 }
 
 a {
@@ -95,7 +126,7 @@ html ::selection {
     background-color: #fadd00;
 }
 
-@media screen and (max-width: 385px) {
+@media screen and (max-width: 48em) {
   mark {
     line-height: 3rem;
   }
@@ -128,16 +159,14 @@ html ::selection {
 
   th.highlight {
     background-color: #efefef;
-    filter: none;
     opacity: 1;
   }
 
   .party-logo {
-    width: 52px;
+    width: 48px;
   }
 
-
-  @media (max-width: 380px) {
+  @media (max-width: 34em) {
     font-size: .9rem;
 
     .party-logo {
@@ -151,8 +180,6 @@ html ::selection {
   width: 96px;
 }
 
-
-
 .session-selector {
   text-align: center;
 
@@ -160,16 +187,6 @@ html ::selection {
     margin-left: 2rem;
     float: none;
   }
-}
-
-.nav {
-  text-align: center;
-}
-
-.sparkline {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
 }
 
 footer {
@@ -190,4 +207,14 @@ footer {
 
 @-moz-document url-prefix() {
   fieldset { display: table-cell; }
+}
+
+.row.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+.row.no-gutters > [class^="col-"],
+.row.no-gutters > [class*=" col-"] {
+  padding-right: 0;
+  padding-left: 0;
 }

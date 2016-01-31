@@ -6,6 +6,7 @@ import ComboCharts from './ComboCharts';
 import Explanation from './Explanation';
 import fetch from 'isomorphic-fetch';
 import Spinner from 'react-spinkit';
+import OtherServices from './OtherServices';
 
 const PARTY_ORDER = [
     'SV',
@@ -61,8 +62,8 @@ export default class Body extends Component {
                 </main>
 
                 <ComboCharts {...data} />
-
                 <Explanation currentSession={currentSession} lastUpdate={lastUpdate}/>
+                <OtherServices />
             </div>
         );
     }

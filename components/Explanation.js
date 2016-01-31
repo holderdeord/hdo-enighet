@@ -5,7 +5,7 @@ moment.locale('nb');
 
 export default (props) => (
     <div className="hdo-card">
-        <div className="hdo-card-header text-lg-center p-a-2">
+        <div className="hdo-card-header text-xs-center">
             <h3>Om utregningen</h3>
         </div>
 
@@ -22,7 +22,7 @@ export default (props) => (
 
             <div className="col-lg-4 col-md-12">
                 <p>På Stortinget stemmes det ofte over mange forslag samtidig for å spare tid. For å unngå at sekretariatets inndeling av forslag i avstemninger påvirker resultatet, teller vi hvert forslag for seg. Resultatet blir da likt som om Stortinget hadde stemt over hvert forslag enkeltvis.</p>
-                <p>Siden over 35% av avstemninger på Stortinget ender med enstemmige vedtak, har vi også valgt å utelate disse fra vår utregning. Dette gjør forskjellen på partiene tydeligere.</p>
+                <p>Siden over 35% av avstemningene på Stortinget ender med enstemmige vedtak, har vi også valgt å utelate disse fra vår utregning. Dette gjør forskjellen på partiene tydeligere.</p>
             </div>
 
             <div className="col-lg-4 col-md-12">

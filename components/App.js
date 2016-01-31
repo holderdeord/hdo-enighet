@@ -1,4 +1,5 @@
 import './main.scss';
+import 'font-awesome/css/font-awesome.css';
 
 import React, {Component} from 'react';
 import {render} from 'react-dom';
