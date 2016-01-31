@@ -24,10 +24,8 @@ export default class ComboCharts extends Component {
                 <div className="hdo-card text-xs-center">
                     <h4 className="hdo-card-header">{logoFor(left)} v. {logoFor(right)}</h4>
 
-                    <div className="p-a-1">
-                        <div>
-                            {this.renderComboChart([left, right])}
-                        </div>
+                    <div className="p-y-1">
+                        {this.renderComboChart([left, right])}
                     </div>
                 </div>
             </div>
@@ -93,7 +91,7 @@ export default class ComboCharts extends Component {
                 type: isRelative ? 'spline' : 'areaspline',
                 backgroundColor: 'transparent',
                 animation: false,
-                height: 380,
+                height: 280,
                 style: {
                     fontFamily: 'Roboto Slab, Helvetica Neue, Helvetica, sans-serif',
                     width: '100%'
