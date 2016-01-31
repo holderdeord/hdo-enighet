@@ -1,23 +1,18 @@
 import React, { Component } from 'react';
-import { Motion, spring, presets } from 'react-motion';
+import { Motion, spring } from 'react-motion';
 import d3 from 'd3';
 import Sparkline from './Sparkline';
 import { logoFor } from './utils';
 import cn from 'classnames';
 
-console.log(presets.stiff);
-
-const scale = d3.scale
-    .linear()
-    .domain([0, 1, 50, 100])
-    // .range(['#B41917', '#1E6419']);
-    .range(['white', '#dd0000', 'white', '#106E0E']);
-
 export default class AgreementTable extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {comboHighlight: {}}
-    }
+    state = {comboHighlight: {}};
+
+    scale = d3.scale
+        .linear()
+        .domain([0, 1, 50, 100])
+        // .range(['#B41917', '#1E6419']);
+        .range(['white', '#dd0000', 'white', '#106E0E']);
 
     render() {
         const {
@@ -96,7 +91,7 @@ export default class AgreementTable extends Component {
                         onMouseOver={this.setComboHighlight.bind(this, left, right)}
                         onMouseOut={this.setComboHighlight.bind(this, null, null)}
                         className={cn('text-center', 'clickable', {highlight, diagonal: value.val === 0})}
-                        style={{backgroundColor: scale(value.val), color: (value.val > 80 || value.val < 20) ? '#eee' : 'inherit'}}>
+                        style={{backgroundColor: this.scale(value.val), color: (value.val > 80 || value.val < 20) ? '#eee' : 'inherit'}}>
                             {value.val === 0 ? '' : `${Math.round(value.val)}%`}
                     </td>
                 )}

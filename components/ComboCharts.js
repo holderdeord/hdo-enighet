@@ -4,17 +4,15 @@ import { logoFor, partyNameFor } from './utils';
 import groupBy from 'lodash.groupby';
 
 export default class ComboCharts extends Component {
+    state = { view: 'relative' };
+
     shouldComponentUpdate(nextProps, nextState) {
         return this.props.bySession !== nextProps.bySession;
     }
 
     render() {
         return (
-            <div className="hdo-card">
-                <div className="hdo-card-header top-border text-xs-center">
-                    <h3>Historikk</h3>
-                </div>
-
+            <div>
                 {this.props.combos.map(combo => this.renderCombo(combo))}
             </div>
         )
@@ -23,16 +21,15 @@ export default class ComboCharts extends Component {
     renderCombo([left, right]) {
         return (
             <div key={left+right} id={`${left}-v-${right}`}>
-                <div className="row">
-                    <div className="col-md-12 text-xs-center">
-                        <h4>{logoFor(left)} v. {logoFor(right)}</h4>
+                <div className="hdo-card text-xs-center">
+                    <h4 className="hdo-card-header">{logoFor(left)} v. {logoFor(right)}</h4>
 
+                    <div className="p-a-1">
                         <div>
                             {this.renderComboChart([left, right])}
                         </div>
                     </div>
                 </div>
-                <hr />
             </div>
         );
     }
@@ -41,21 +38,59 @@ export default class ComboCharts extends Component {
         const { sessions, bySession } = this.props;
         const key = [left, right].sort().join(',');
 
-        const data = sessions.map(session => {
+        let percentData = [];
+        let countData = [];
+        let totalData = [];
+
+        sessions.map(session => {
             const combo = bySession[session][key];
 
-            if (combo) {
-                const val = left === right ? 100 : Math.round((combo.count / combo.total) * 100);
-                return [session, val];
+            if (combo && combo.total) {
+                const val = Math.round((combo.count / combo.total) * 100);
+                percentData.push([session, val]);
+                countData.push([session, combo.count]);
+                totalData.push([session, combo.total]);
             } else {
                 return [session, null];
             }
         })
-        .filter(([session, val]) => val > 0);
+
+        percentData = percentData.filter(([session, val]) => val > 0);
+        countData = countData.filter(([session, val]) => val > 0);
+        totalData = totalData.filter(([session, val]) => val > 0);
+
+        const series = [];
+        const isRelative = this.state.view === 'relative';
+
+        if (isRelative) {
+            series.push({
+                name: 'Prosent enighet',
+                data: percentData,
+                color: '#606b82',
+                lineWidth: 4,
+                marker: {
+                    radius: 6
+                }
+            });
+        } else {
+            series.push({
+                name: 'Antall forslag enige',
+                data: countData,
+                color: '#606b82',
+                lineWidth: 4
+            });
+
+            series.push({
+                name: 'Antall forslag',
+                data: totalData,
+                color: '#b8bfcc',
+                lineWidth: 4
+            });
+        }
 
         const config = {
             chart: {
-                type: 'spline',
+                type: isRelative ? 'spline' : 'areaspline',
                 backgroundColor: 'transparent',
                 animation: false,
                 height: 380,
@@ -75,15 +110,35 @@ export default class ComboCharts extends Component {
             },
 
             xAxis: {
-                type: 'category'
+                type: 'category',
+                lineColor: '#ddd',
+                gridLineWidth: 0,
+                minorGridLineWidth: 0,
+                tickWidth: 0,
+                labels: {
+                    style: {
+                        fontSize: '0.9rem',
+                        fontWeight: '600'
+                    }
+                }
             },
 
             yAxis: {
-                min: 0,
-                max: 100,
+                tickInterval: 25,
+                tickPosition: 'inside',
+                gridLineWidth: 1,
+                gridLineColor: 'rgba(221, 221, 221, 0.6)',
+                min: isRelative ? 0 : undefined,
+                max: isRelative ? 100 : undefined,
                 title: { enabled: false },
                 labels: {
-                    format: '{value}%'
+                    format: isRelative ? '{value}%' : '{value}',
+                    style: {
+                        fontSize: '0.9rem',
+                        fontWeight: 'normal',
+                        color: '#999'
+                    }
+
                 }
             },
 
@@ -91,14 +146,7 @@ export default class ComboCharts extends Component {
                 enabled: false
             },
 
-            series: [
-                {
-                    name: 'Prosent enighet',
-                    data,
-                    color: '#566f7c',
-                    width: 1
-                }
-            ]
+            series
         };
 
         return (

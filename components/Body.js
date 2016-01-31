@@ -19,13 +19,10 @@ const PARTY_ORDER = [
 ]
 
 export default class Body extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedSession: 'all',
-            showExplanation: false
-        };
-    }
+    state = {
+        selectedSession: 'all',
+        showExplanation: false
+    };
 
     componentDidMount() {
         const url = 'agreement.json'

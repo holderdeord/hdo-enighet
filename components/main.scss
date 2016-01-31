@@ -31,8 +31,7 @@ header {
 
 .hdo-card {
   background-color: #fff;
-  // box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
   margin-top: 2rem;
 
   .hdo-card-header {
@@ -124,8 +123,7 @@ html ::selection {
   }
 
   td:hover, td a:hover {
-    color: inherit;
-    font-weight: 600;
+    font-size: 1.6rem;
   }
 
   th.highlight {
