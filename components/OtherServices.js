@@ -3,21 +3,21 @@ import React from 'react';
 const services = [
     {
         title: 'Blogg',
-        img: "//files.holderdeord.no/images/stortingssalen.jpg",
+        img: '//files.holderdeord.no/images/stortingssalen.jpg',
         url: 'https://blog.holderdeord.no/',
         description: 'Datadrevne analyser av norsk politikk'
     },
 
     {
         title: 'Sagt i salen',
-        img: "//files.holderdeord.no/images/tale.png",
+        img: '//files.holderdeord.no/images/tale.png',
         url: 'https://tale.holderdeord.no/',
         description: 'En visualisering av språkbruk på Stortinget'
     },
 
     {
         title: 'Partipisken',
-        img: "//files.holderdeord.no/images/partipisken.jpg",
+        img: '//files.holderdeord.no/images/partipisken.jpg',
         url: 'https://twitter.com/partipisken',
         description: 'Rebeller på tinget'
     },
