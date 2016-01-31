@@ -73,7 +73,7 @@ export default (props) => {
     return (
         <div className="other-services hdo-card">
             <div className="hdo-card-header text-xs-center">
-                <h1>Holder de ord</h1>
+                <h3>Andre tjenester fra Holder de ord</h3>
             </div>
 
             <div className="row no-gutters text-xs-center">
