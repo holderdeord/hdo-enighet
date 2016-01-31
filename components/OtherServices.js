@@ -12,7 +12,7 @@ const services = [
         title: 'Sagt i salen',
         img: '//files.holderdeord.no/images/tale.png',
         url: 'https://tale.holderdeord.no/',
-        description: 'En visualisering av språkbruk på Stortinget'
+        description: 'Visualisering av språkbruk på Stortinget'
     },
 
     {
@@ -49,7 +49,7 @@ export default (props) => {
                             <div className="p-a-2">
                                 <h4>{service.title}</h4>
 
-                                <p>{service.description}</p>
+                                <p className="lead">{service.description}</p>
                             </div>
                         </a>
                     </div>                    
