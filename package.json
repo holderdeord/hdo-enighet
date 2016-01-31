@@ -7,7 +7,7 @@
     "dev": "node server/dev-server.js",
     "lint": "eslint components",
     "build": "webpack --bail --optimize-minimize --optimize-occurence-order --optimize-dedupe && cp -R $(ls public/* | grep -v agreement.json | xargs) build/",
-    "deploy": "[[ -z $(git status --porcelain) ]] && [[ -z $(git cherry -v) ]] && ssh hdo@hdo02.holderdeord.no 'cd /webapps/hdo-enighet/build && git pull --ff-only && npm run build'",
+    "deploy": "[[ -z $(git status --porcelain) ]] && [[ -z $(git cherry -v) ]] && ssh hdo@hdo02.holderdeord.no 'cd /webapps/hdo-enighet/build && git pull --ff-only && npm install && npm run build'",
     "test": "npm run lint"
   },
   "author": "jari@holderdeord.no",
