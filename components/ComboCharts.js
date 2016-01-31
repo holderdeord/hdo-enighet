@@ -12,7 +12,7 @@ export default class ComboCharts extends Component {
 
     render() {
         return (
-            <div>
+            <div className="row">
                 {this.props.combos.map(combo => this.renderCombo(combo))}
             </div>
         )
@@ -20,7 +20,7 @@ export default class ComboCharts extends Component {
 
     renderCombo([left, right]) {
         return (
-            <div key={left+right} id={`${left}-v-${right}`}>
+            <div key={left+right} id={`${left}-v-${right}`} className="col-md-6">
                 <div className="hdo-card text-xs-center">
                     <h4 className="hdo-card-header">{logoFor(left)} v. {logoFor(right)}</h4>
 
@@ -117,7 +117,7 @@ export default class ComboCharts extends Component {
                 tickWidth: 0,
                 labels: {
                     style: {
-                        fontSize: '0.9rem',
+                        fontSize: '0.65rem',
                         fontWeight: '600'
                     }
                 }
@@ -144,6 +144,10 @@ export default class ComboCharts extends Component {
 
             credits: {
                 enabled: false
+            },
+
+            tooltip: {
+                pointFormat: `<strong>${left} v. ${right}</strong>: {point.y}% enige`,
             },
 
             series
