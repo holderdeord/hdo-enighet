@@ -28,7 +28,7 @@ export default class Body extends Component {
     componentDidMount() {
         const url = 'agreement.json'
 
-        fetch(url, {credentials: 'same-origin'})
+        fetch(url, {credentials: 'include'})
             .then(res => res.json())
             .then(data => this.setState({data: this.parse(data)}))
     }
