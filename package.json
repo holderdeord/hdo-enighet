@@ -11,7 +11,7 @@
     "test": "npm run lint"
   },
   "author": "jari@holderdeord.no",
-  "license": "BSD",
+  "license": "BSD-3-Clause",
   "babel": {
     "presets": [
       "react",
