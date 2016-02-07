@@ -1,7 +1,18 @@
 $dark-background-color: #fcfcfc;
+$diagonal-pattern: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAIAAABvrngfAAAAK0lEQVQImWM4c+bMf1TA+P//fwYkcPbsWQZkeYgOBjQ+QgjZRAY0/v///wEsaFwPg05jgQAAAABJRU5ErkJggg==");
 
 body {
 }
+
+// avoid iOS zoom
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px;
+  }
+}
+
 
 button {
   outline: none !important;
@@ -147,12 +158,16 @@ html ::selection {
     border-top: none;
   }
 
-  a {
-    text-decoration: none;
+  th {
+    background-color: white;
   }
 
   .diagonal {
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAIAAABvrngfAAAAK0lEQVQImWM4c+bMf1TA+P//fwYkcPbsWQZkeYgOBjQ+QgjZRAY0/v///wEsaFwPg05jgQAAAABJRU5ErkJggg==");
+    background-image: $diagonal-pattern;
+  }
+
+  a {
+    text-decoration: none;
   }
 
   td:hover, td a:hover {
