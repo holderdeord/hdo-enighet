@@ -6,8 +6,9 @@ import groupBy from 'lodash.groupby';
 export default class ComboCharts extends Component {
     state = { view: 'relative' };
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return this.props.bySession !== nextProps.bySession;
+    shouldComponentUpdate({bySession, selectedCategory}, nextState) {
+        return this.props.bySession !== bySession ||
+            this.props.selectedCategory !== selectedCategory;
     }
 
     render() {
@@ -22,7 +23,10 @@ export default class ComboCharts extends Component {
         return (
             <div key={left+right} id={`${left}-v-${right}`} className="col-md-6">
                 <div className="hdo-card text-xs-center">
-                    <h4 className="hdo-card-header">{logoFor(left)} v. {logoFor(right)}</h4>
+                    <div className="hdo-card-header">
+                        <h4>{logoFor(left)} v. {logoFor(right)}</h4>
+                        <h5>{this.props.selectedCategory === 'all' ? '' : `i saker om ${this.props.selectedCategory}`}</h5>
+                    </div>
 
                     <div className="p-y-1">
                         {this.renderComboChart([left, right])}
@@ -33,7 +37,7 @@ export default class ComboCharts extends Component {
     }
 
     renderComboChart([left, right]) {
-        const { sessions, bySession } = this.props;
+        const { sessions, bySession, selectedCategory } = this.props;
         const key = [left, right].sort().join(',');
 
         let percentData = [];
@@ -41,7 +45,8 @@ export default class ComboCharts extends Component {
         let totalData = [];
 
         sessions.map(session => {
-            const combo = bySession[session][key];
+            const sessionData = bySession[session];
+            const combo = selectedCategory === 'all' ? sessionData.all[key] : sessionData.categories[selectedCategory] && sessionData.categories[selectedCategory][key]
 
             if (combo && combo.total) {
                 const val = Math.round((combo.count / combo.total) * 100);
@@ -90,7 +95,7 @@ export default class ComboCharts extends Component {
             chart: {
                 type: isRelative ? 'spline' : 'areaspline',
                 backgroundColor: 'transparent',
-                animation: false,
+                animation: true,
                 height: 280,
                 style: {
                     fontFamily: 'Roboto Slab, Helvetica Neue, Helvetica, sans-serif',

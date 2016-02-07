@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
 import Spinner from 'react-spinkit';
 
-import SessionSelector from './SessionSelector';
+import Controls from './Controls';
 import AgreementTable from './AgreementTable';
 import ComboCharts from './ComboCharts';
 import Explanation from './Explanation';
@@ -22,7 +22,7 @@ const PARTY_ORDER = [
 export default class Body extends Component {
     state = {
         selectedSession: 'all',
-        showExplanation: false
+        selectedCategory: 'all'
     };
 
     componentDidMount() {
@@ -43,9 +43,10 @@ export default class Body extends Component {
         }
 
         const {
-            data: { sessions, currentSession, lastUpdate},
+            data: { sessions, currentSession, lastUpdate, categories},
             data,
             selectedSession,
+            selectedCategory,
         } = this.state;
 
         return (
@@ -53,15 +54,19 @@ export default class Body extends Component {
                 <main>
                     <AgreementTable
                         selectedSession={selectedSession}
+                        selectedCategory={selectedCategory}
                         {...data} />
 
-                    <SessionSelector
+                    <Controls
+                        categories={['all', ...categories]}
                         sessions={['all', ...sessions]}
-                        selected={selectedSession}
-                        onChange={::this.handleSessionChange} />
+                        selectedCategory={selectedCategory}
+                        selectedSession={selectedSession}
+                        onSessionChange={::this.handleSessionChange}
+                        onCategoryChange={::this.handleCategoryChange} />
                 </main>
 
-                <ComboCharts {...data} />
+                <ComboCharts {...data} selectedCategory={selectedCategory} />
                 <Explanation currentSession={currentSession} lastUpdate={lastUpdate}/>
                 <RelatedServices />
             </div>
@@ -72,8 +77,12 @@ export default class Body extends Component {
         this.setState({selectedSession: session});
     }
 
+    handleCategoryChange(category) {
+        this.setState({selectedCategory: category});
+    }
+
     parse(data) {
-        let parties = Object.keys(data.all_time)
+        let parties = Object.keys(data.all_time.all)
             .map(e => e.split(','))
             .reduce((a, e) => [...a, ...e], [])
 
@@ -92,13 +101,14 @@ export default class Body extends Component {
             })
         });
 
-        const sessions = Object.keys(data.by_session).filter(s => Object.keys(data.by_session[s]).length > 0)
+        const sessions = Object.keys(data.by_session).filter(s => Object.keys(data.by_session[s].all).length > 0)
         const sortedCombos = Object.keys(combos).map(k => combos[k]).sort((a,b) => a.join().localeCompare(b.join()));
 
         return {
             parties,
             combos: sortedCombos,
             sessions,
+            categories: data.categories.sort((a, b) => a.localeCompare(b)),
             allTime: data.all_time,
             bySession: data.by_session,
             currentSession: data.current_session,
