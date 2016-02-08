@@ -18,6 +18,8 @@ export default (props) => (
                 <p>
                     Datagrunnlaget kommer i hovedsak fra <a href="http://data.stortinget.no/">Stortingets datatjeneste</a>, som er lisensiert under <a href="http://data.norge.no/NLOD">NLOD</a>.
                 </p>
+
+                <p>Inneværende sesjon ({props.currentSession}) er ufullstendig. Tallene oppdateres daglig, og ble sist oppdatert <strong>{moment(props.lastUpdate).fromNow()}</strong>.</p>
             </div>
 
             <div className="col-lg-4 col-md-12">
@@ -26,8 +28,8 @@ export default (props) => (
             </div>
 
             <div className="col-lg-4 col-md-12">
+                <p>Kategoriene og inndelingen av saker i kategorier er gjort av Stortinget. Vi bruker de 23 hovedkategoriene fra Stortingets kategoritre, og saker som er kategorisert i flere kategorier telles en gang i hver hovedkategori.</p>
                 <p>For å unngå at fravær påvirker prosentbrøken, er nevneren alltid lik antall forslag som begge de aktuelle partiene har stemt over.</p>
-                <p>Inneværende sesjon ({props.currentSession}) er ufullstendig. Tallene oppdateres daglig, og ble sist oppdatert <strong>{moment(props.lastUpdate).fromNow()}</strong>.</p>
             </div>
         </div>
     </div>
