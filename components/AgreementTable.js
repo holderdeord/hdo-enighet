@@ -17,6 +17,7 @@ export default class AgreementTable extends Component {
     render() {
         const {
             parties,
+            unit
         } = this.props;
 
         const {
@@ -25,8 +26,8 @@ export default class AgreementTable extends Component {
         } = this.state.comboHighlight;
 
         return (
-            <div className="table-responsive">
-                <table className="table table-sm">
+            <div className={"table-responsive"}>
+                <table className={`table table-sm unit-${unit}`}>
                     <thead>
                         <tr>
                             <th className="diagonal" />
@@ -53,19 +54,22 @@ export default class AgreementTable extends Component {
 
     renderComparison(left, right, rowIndex, colIndex) {
         const key = [left,right].sort().join(',');
-        const highlight = this.state.comboHighlight.left == left || this.state.comboHighlight.right === right;
+
+        if (left == right) {
+            return <td key={key} className="diagonal" />;
+        }
 
         const {
             selectedSession,
             selectedCategory,
             sessions,
             bySession,
-            allTime
+            allTime,
+            unit
         } = this.props;
 
-        if (left == right) {
-            return <td key={key} className="diagonal" />;
-        }
+        const isRelative = unit === 'relative';
+        const highlight = this.state.comboHighlight.left == left || this.state.comboHighlight.right === right;
 
         let combo;
 
@@ -75,27 +79,49 @@ export default class AgreementTable extends Component {
             combo = selectedCategory === 'all' ? bySession[selectedSession].all[key] : bySession[selectedSession].categories[selectedCategory] && bySession[selectedSession].categories[selectedCategory][key];
         }
 
-        let val = 0;
-        let title = `${left} v. ${right}: 0 / 0 voteringsforslag`;
+        let val = 0, count = 0, total = 0;
 
         if (combo) {
             val = Math.round((combo.count / combo.total) * 100);
-            title = `${left} v. ${right}: ${combo.count} / ${combo.total} voteringsforslag`;
+            count = combo.count;
+            total = combo.total;
         }
 
+        const title = `${left} v. ${right}: ${count} / ${total} voteringsforslag`;
+        const isEmpty = !combo || combo.total === 0;
+
+        const style = {
+            val: spring(val, [300, 50]),
+            count: count,
+            total: total
+        };
+
         return (
-            <Motion key={key} defaultStyle={{val: val}} style={{val: spring(val, [300, 50])}}>
-                {value => (
-                    <td
-                        title={title}
-                        onClick={this.setHash.bind(null, [left,right].sort().join('-v-'))}
-                        onMouseOver={this.setComboHighlight.bind(this, left, right)}
-                        onMouseOut={this.setComboHighlight.bind(this, null, null)}
-                        className={cn('text-center', 'clickable', {highlight, diagonal: !combo || combo.total === 0})}
-                        style={{backgroundColor: this.scale(value.val), color: (value.val > 80 || value.val < 20) ? '#eee' : 'inherit'}}>
-                            {!combo || combo.total === 0 ? '' : `${Math.round(value.val)}%`}
-                    </td>
-                )}
+            <Motion key={key} defaultStyle={{val, count, total}} style={style}>
+                {value => {
+                    let displayValue;
+
+                    if (isEmpty) {
+                        displayValue = '';
+                    } else if (isRelative) {
+                        displayValue = `${Math.round(value.val)}%`
+                    } else {
+                        displayValue = `${Math.round(value.count)} / ${Math.round(value.total)}`;
+                    }
+
+                    return (
+                        <td
+                            title={title}
+                            onClick={this.setHash.bind(null, [left,right].sort().join('-v-'))}
+                            onMouseOver={this.setComboHighlight.bind(this, left, right)}
+                            onMouseOut={this.setComboHighlight.bind(this, null, null)}
+                            className={cn('text-center', 'clickable', {highlight, diagonal: isEmpty})}
+                            style={{backgroundColor: this.scale(value.val), color: (value.val > 80 || value.val < 20) ? '#eee' : 'inherit'}}>
+                                {displayValue}
+                        </td>
+
+                    )
+                }}
             </Motion>
         );
     }

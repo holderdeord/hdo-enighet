@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import Select from 'react-select';
 
 
-export default class SessionSelector extends Component {
+export default class Controls extends Component {
     render() {
         return (
             <div className="controls">
@@ -24,7 +24,9 @@ export default class SessionSelector extends Component {
             sessions,
             selectedSession,
             selectedCategory,
-            categories
+            categories,
+            unit,
+            onUnitChange
         } = this.props;
 
         return (
@@ -43,8 +45,30 @@ export default class SessionSelector extends Component {
                 <hr />
 
                 <div className="row">
-                    <div className="col-md-4 col-md-offset-4">
-                        {this.renderCategorySelect()}
+                    <div className="col-md-6">
+                        <div className="row">
+                            <div className="col-md-6 col-md-offset-3">
+                                {this.renderCategorySelect()}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="col-md-6">
+                        <div className="btn-group btn-toggle">
+                            <input
+                                type="button"
+                                value="Relativ"
+                                onClick={onUnitChange.bind(null, 'relative')}
+                                className={`btn btn-sm ${unit === 'relative' ? 'btn-primary' : 'btn-secondary'}`}
+                            />
+
+                            <input
+                                type="button"
+                                value="Absolutt"
+                                onClick={onUnitChange.bind(null, 'absolute')}
+                                className={`btn btn-sm ${unit === 'absolute' ? 'btn-primary' : 'btn-secondary'}`}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

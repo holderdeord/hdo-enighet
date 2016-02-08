@@ -4,11 +4,10 @@ import { logoFor, partyNameFor } from './utils';
 import groupBy from 'lodash.groupby';
 
 export default class ComboCharts extends Component {
-    state = { view: 'relative' };
-
-    shouldComponentUpdate({bySession, selectedCategory}, nextState) {
+    shouldComponentUpdate({bySession, selectedCategory, unit}, nextState) {
         return this.props.bySession !== bySession ||
-            this.props.selectedCategory !== selectedCategory;
+            this.props.selectedCategory !== selectedCategory ||
+            this.props.unit !== unit;
     }
 
     render() {
@@ -63,7 +62,7 @@ export default class ComboCharts extends Component {
         totalData = totalData.filter(([session, val]) => val > 0);
 
         const series = [];
-        const isRelative = this.state.view === 'relative';
+        const isRelative = this.props.unit === 'relative';
 
         if (isRelative) {
             series.push({
@@ -84,7 +83,7 @@ export default class ComboCharts extends Component {
             });
 
             series.push({
-                name: 'Antall forslag',
+                name: 'Antall forslag totalt',
                 data: totalData,
                 color: '#b8bfcc',
                 lineWidth: 4
@@ -127,7 +126,7 @@ export default class ComboCharts extends Component {
             },
 
             yAxis: {
-                tickInterval: 25,
+                tickInterval: isRelative ? 25 : undefined,
                 tickPosition: 'inside',
                 gridLineWidth: 1,
                 gridLineColor: 'rgba(221, 221, 221, 0.6)',
@@ -150,7 +149,7 @@ export default class ComboCharts extends Component {
             },
 
             tooltip: {
-                pointFormat: `<strong>${left} v. ${right}</strong>: {point.y}% enige`,
+                pointFormat: `<strong>${left} v. ${right}</strong>: ${isRelative ? "{point.y}% enige" : "{series.name}: {point.y}"}`,
             },
 
             series

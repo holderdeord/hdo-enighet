@@ -160,6 +160,10 @@ html ::selection {
   border-bottom: 1px solid #eceeef;
   margin-bottom: 0;
 
+  &.unit-absolute {
+    font-size: 1.1rem;
+  }
+
   th, td {
     text-align: center;
     vertical-align: middle;

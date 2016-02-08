@@ -22,7 +22,8 @@ const PARTY_ORDER = [
 export default class Body extends Component {
     state = {
         selectedSession: 'all',
-        selectedCategory: 'all'
+        selectedCategory: 'all',
+        unit: 'relative'
     };
 
     componentDidMount() {
@@ -47,26 +48,37 @@ export default class Body extends Component {
             data,
             selectedSession,
             selectedCategory,
+            unit
         } = this.state;
 
         return (
             <div>
                 <main>
                     <AgreementTable
+                        unit={unit}
                         selectedSession={selectedSession}
                         selectedCategory={selectedCategory}
-                        {...data} />
+                        {...data}
+                    />
 
                     <Controls
+                        unit={unit}
                         categories={['all', ...categories]}
                         sessions={['all', ...sessions]}
                         selectedCategory={selectedCategory}
                         selectedSession={selectedSession}
                         onSessionChange={::this.handleSessionChange}
-                        onCategoryChange={::this.handleCategoryChange} />
+                        onCategoryChange={::this.handleCategoryChange}
+                        onUnitChange={::this.handleUnitChange}
+                     />
                 </main>
 
-                {<ComboCharts {...data} selectedCategory={selectedCategory} />}
+                <ComboCharts
+                    {...data}
+                    selectedCategory={selectedCategory}
+                    unit={unit}
+                />
+
                 <Explanation currentSession={currentSession} lastUpdate={lastUpdate}/>
                 <RelatedServices />
             </div>
@@ -79,6 +91,10 @@ export default class Body extends Component {
 
     handleCategoryChange(category) {
         this.setState({selectedCategory: category});
+    }
+
+    handleUnitChange(unit) {
+        this.setState({unit: unit});
     }
 
     parse(data) {
