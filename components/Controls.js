@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import classnames from 'classnames';
+import Select from 'react-select';
 
 
 export default class SessionSelector extends Component {
@@ -10,8 +11,8 @@ export default class SessionSelector extends Component {
                     {this.renderToolbar()}
                 </div>
 
-                <div className="hidden-sm-up">
-                    {this.renderSelect()}
+                <div className="hidden-sm-up p-a-1">
+                    <div className="p-b-1">{this.renderSessionSelect()}</div>
                     {this.renderCategorySelect()}
                 </div>
             </div>
@@ -22,7 +23,8 @@ export default class SessionSelector extends Component {
         const {
             sessions,
             selectedSession,
-            selectedCategory
+            selectedCategory,
+            categories
         } = this.props;
 
         return (
@@ -38,47 +40,50 @@ export default class SessionSelector extends Component {
                     ))}
                 </div>
 
-                <div className="btn-group btn-group-sm m-t-1" role="group">
-                    {this.props.categories.slice(0, 23).map(category => (
-                        <button key={category}
-                                type="button"
-                                onClick={this.props.onCategoryChange.bind(null, category)}
-                                className={classnames('btn', 'btn-secondary', {active: category === selectedCategory})}>
-                                    {category === 'all' ? 'Alle kategorier' : category}
-                            </button>
-                    ))}
+                <hr />
+
+                <div className="row">
+                    <div className="col-md-4 col-md-offset-4">
+                        {this.renderCategorySelect()}
+                    </div>
                 </div>
             </div>
         );
     }
 
-    renderSelect() {
+    renderSessionSelect() {
         const { sessions, selectedSession } = this.props;
 
+        const options = this.props.sessions.map(session => ({
+            value: session,
+            label: session === 'all' ? 'Alle sesjoner' : session
+        }));
+
         return (
-            <div className="p-t-2 p-b-1">
-                <select className="custom-select"
-                        value={selectedSession}
-                        onChange={(e) => this.props.onSessionChange(e.target.value)}>
-                    {this.props.sessions.map(session => (
-                        <option key={session} value={session}>
-                            {session === 'all' ? 'Alle sesjoner' : session}
-                        </option>
-                    ))}
-                </select>
-            </div>
-        )
+            <Select
+                clearable={false}
+                searchable={false}
+                value={selectedSession}
+                onChange={this.props.onSessionChange}
+                options={options}
+            />
+        );
     }
 
     renderCategorySelect() {
+        const options = this.props.categories.map(c => ({
+            value: c,
+            label: c === 'all' ? 'Alle kategorier' : c
+        }));
+
         return (
-          <select className="custom-select input-sm"
-                    onChange={e => this.props.onCategoryChange(e.target.value)}
-                    value={this.props.selectedCategory}>
-            {this.props.categories.map(c =>
-              <option key={c} value={c}>{c == 'all' ? 'Alle kategorier' : c}</option>
-            )}
-          </select>
+            <Select
+                clearable={false}
+                searchable={false}
+                onChange={this.props.onCategoryChange}
+                value={this.props.selectedCategory}
+                options={options}
+            />
         );
     }
 }

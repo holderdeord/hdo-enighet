@@ -25,7 +25,7 @@ export default class ComboCharts extends Component {
                 <div className="hdo-card text-xs-center">
                     <div className="hdo-card-header">
                         <h4>{logoFor(left)} v. {logoFor(right)}</h4>
-                        <h5>{this.props.selectedCategory === 'all' ? '' : `i saker om ${this.props.selectedCategory}`}</h5>
+                        <h5>{this.props.selectedCategory === 'all' ? '' : <span>i saker om <strong>{this.props.selectedCategory}</strong></span>}</h5>
                     </div>
 
                     <div className="p-y-1">

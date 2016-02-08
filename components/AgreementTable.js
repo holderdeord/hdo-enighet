@@ -10,9 +10,9 @@ export default class AgreementTable extends Component {
 
     scale = d3.scale
         .linear()
-        .domain([0, 1, 50, 100])
+        .domain([0, 50, 100])
         // .range(['#B41917', '#1E6419']);
-        .range(['white', '#dd0000', 'white', '#106E0E']);
+        .range(['#dd0000', 'white', '#106E0E']);
 
     render() {
         const {
@@ -76,7 +76,7 @@ export default class AgreementTable extends Component {
         }
 
         let val = 0;
-        let title = '';
+        let title = `${left} v. ${right}: 0 / 0 voteringsforslag`;
 
         if (combo) {
             val = Math.round((combo.count / combo.total) * 100);
@@ -91,9 +91,9 @@ export default class AgreementTable extends Component {
                         onClick={this.setHash.bind(null, [left,right].sort().join('-v-'))}
                         onMouseOver={this.setComboHighlight.bind(this, left, right)}
                         onMouseOut={this.setComboHighlight.bind(this, null, null)}
-                        className={cn('text-center', 'clickable', {highlight, diagonal: value.val === 0})}
+                        className={cn('text-center', 'clickable', {highlight, diagonal: !combo || combo.total === 0})}
                         style={{backgroundColor: this.scale(value.val), color: (value.val > 80 || value.val < 20) ? '#eee' : 'inherit'}}>
-                            {value.val === 0 ? '' : `${Math.round(value.val)}%`}
+                            {!combo || combo.total === 0 ? '' : `${Math.round(value.val)}%`}
                     </td>
                 )}
             </Motion>

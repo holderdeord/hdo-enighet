@@ -66,7 +66,7 @@ export default class Body extends Component {
                         onCategoryChange={::this.handleCategoryChange} />
                 </main>
 
-                <ComboCharts {...data} selectedCategory={selectedCategory} />
+                {<ComboCharts {...data} selectedCategory={selectedCategory} />}
                 <Explanation currentSession={currentSession} lastUpdate={lastUpdate}/>
                 <RelatedServices />
             </div>

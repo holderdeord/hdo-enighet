@@ -1,3 +1,11 @@
+@import "./select.scss";
+@import "~react-select/scss/control";
+@import "~react-select/scss/menu";
+@import "~react-select/scss/mixins";
+@import "~react-select/scss/multi";
+@import "~react-select/scss/spinner";
+
+
 $dark-background-color: #fcfcfc;
 $diagonal-pattern: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAIAAABvrngfAAAAK0lEQVQImWM4c+bMf1TA+P//fwYkcPbsWQZkeYgOBjQ+QgjZRAY0/v///wEsaFwPg05jgQAAAABJRU5ErkJggg==");
 
