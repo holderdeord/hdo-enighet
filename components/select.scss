@@ -59,10 +59,10 @@ $select-item-gutter:               5px;
 $select-item-padding-vertical:     2px;
 $select-item-padding-horizontal:   5px;
 $select-item-font-size:            .9em;
-$select-item-color:                #fadd00; // pale blue
+$select-item-color:                #fadd00;
 $select-item-bg:                   #f2f9fc;
 $select-item-border-color:         darken($select-item-bg, 10%);
-$select-item-hover-color:          darken($select-item-color, 5%); // pale blue
+$select-item-hover-color:          darken($select-item-color, 5%);
 $select-item-hover-bg:             darken($select-item-bg, 5%);
 $select-item-disabled-color:       #888;
 $select-item-disabled-bg:          #f2f2f2;
