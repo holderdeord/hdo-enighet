@@ -149,7 +149,7 @@ export default class ComboCharts extends Component {
             },
 
             tooltip: {
-                pointFormat: `<strong>${left} v. ${right}</strong>: ${isRelative ? "{point.y}% enige" : "{series.name}: {point.y}"}`,
+                pointFormat: `<strong>${left} v. ${right}</strong>: ${isRelative ? '{point.y}% enige' : '{series.name}: {point.y}'}`,
             },
 
             series
