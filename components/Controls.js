@@ -31,7 +31,7 @@ export default class Controls extends Component {
 
         return (
             <div className="hdo-card-header">
-                <div className="btn-group btn-group-sm" role="group">
+                <div className="btn-group btn-group-sm p-b-1" role="group">
                     {this.props.sessions.map(session => (
                         <button key={session}
                                 type="button"
@@ -42,35 +42,31 @@ export default class Controls extends Component {
                     ))}
                 </div>
 
-                <hr />
-
                 <div className="row">
-                    <div className="col-md-6">
-                        <div className="row">
-                            <div className="col-md-6 col-md-offset-3">
-                                {this.renderCategorySelect()}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-md-6">
-                        <div className="btn-group btn-toggle">
-                            <input
-                                type="button"
-                                value="Relativ"
-                                onClick={onUnitChange.bind(null, 'relative')}
-                                className={`btn btn-sm ${unit === 'relative' ? 'btn-primary' : 'btn-secondary'}`}
-                            />
-
-                            <input
-                                type="button"
-                                value="Absolutt"
-                                onClick={onUnitChange.bind(null, 'absolute')}
-                                className={`btn btn-sm ${unit === 'absolute' ? 'btn-primary' : 'btn-secondary'}`}
-                            />
-                        </div>
+                    <div className="col-md-4 col-md-offset-4">
+                        {this.renderCategorySelect()}
                     </div>
                 </div>
+            </div>
+        );
+    }
+
+    renderUnitSelector() {
+        return (
+            <div className="btn-group btn-toggle">
+                <input
+                    type="button"
+                    value="Relativ"
+                    onClick={onUnitChange.bind(null, 'relative')}
+                    className={`btn btn-sm ${unit === 'relative' ? 'btn-primary' : 'btn-secondary'}`}
+                />
+
+                <input
+                    type="button"
+                    value="Absolutt"
+                    onClick={onUnitChange.bind(null, 'absolute')}
+                    className={`btn btn-sm ${unit === 'absolute' ? 'btn-primary' : 'btn-secondary'}`}
+                />
             </div>
         );
     }

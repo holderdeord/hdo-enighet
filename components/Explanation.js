@@ -28,7 +28,7 @@ export default (props) => (
             </div>
 
             <div className="col-lg-4 col-md-12">
-                <p>Kategoriene og inndelingen av saker i kategorier er gjort av Stortinget. Vi bruker de 23 hovedkategoriene fra Stortingets kategoritre, og saker som er kategorisert i flere kategorier telles en gang i hver hovedkategori.</p>
+                <p>Kategoriene og inndelingen av saker i kategorier er gjort av Stortinget. Vi bruker de 23 hovedkategoriene fra Stortingets kategori-tre, og saker som er kategorisert i flere kategorier telles en gang i hver hovedkategori.</p>
                 <p>For å unngå at fravær påvirker prosentbrøken, er nevneren alltid lik antall forslag som begge de aktuelle partiene har stemt over.</p>
             </div>
         </div>
