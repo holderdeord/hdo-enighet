@@ -5,7 +5,7 @@ export default class RelatedServices extends Component {
     state = { services: [] };
 
     componentDidMount() {
-        fetch('https://files.holderdeord.no/data/hdo/services.json')
+        fetch('https://files.holderdeord.no/data/hdo/services.json?service=enighet')
             .then(res => res.ok ? res.json() : [])
             .then(services => this.setState({services}));
     }
