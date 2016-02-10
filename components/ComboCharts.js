@@ -4,10 +4,8 @@ import groupBy from 'lodash.groupby';
 import Chart from './Chart';
 
 export default class ComboCharts extends Component {
-    state = { id: false };
-
     shouldComponentUpdate({bySession, selectedCategory, unit}, nextState) {
-        return this.props.bySession !== bySession || this.state.id !== nextState.id;
+        return this.props.bySession !== bySession || selectedCategory !== this.props.selectedCategory;
     }
 
     render() {
@@ -33,10 +31,6 @@ export default class ComboCharts extends Component {
                 </div>
             </div>
         );
-    }
-
-    redraw() {
-        this.setState({id: !this.state.id});
     }
 
     renderComboChart([left, right]) {

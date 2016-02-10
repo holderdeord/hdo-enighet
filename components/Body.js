@@ -32,6 +32,25 @@ export default class Body extends Component {
         fetch(url, {credentials: 'same-origin'})
             .then(res => res.json())
             .then(data => this.setState({data: this.parse(data)}))
+
+        if (this.props.animate) {
+            this.animateTimer = setInterval(() => {
+                if (this.props.animate.includes('categories')) {
+                    this.selectNextCategory();
+                }
+
+                if (this.props.animate.includes('sessions')) {
+                    this.selectNextSession();
+                }
+            }, 1000);
+        }
+    }
+
+    componentWillUnmount() {
+        if (this.animateTimer) {
+            clearInterval(this.animateTimer);
+            this.animateTimer = null;
+        }
     }
 
     render() {
@@ -131,6 +150,54 @@ export default class Body extends Component {
             currentSession: data.current_session,
             lastUpdate: data.last_update
         };
+    }
+
+    selectNextCategory() {
+        if (!this.state.data) {
+            return;
+        }
+
+        const {
+            data: { categories },
+            selectedCategory
+        } = this.state;
+
+        const currentIndex = categories.indexOf(selectedCategory) + 1;
+        let nextCategory = currentIndex >= categories.length ? categories[0] : categories[currentIndex];
+
+        this.setState({selectedCategory: nextCategory});
+    }
+
+    selectNextCategory() {
+        if (!this.state.data) {
+            return;
+        }
+
+        const {
+            data: { categories },
+            selectedCategory
+        } = this.state;
+
+        const currentIndex = categories.indexOf(selectedCategory) + 1;
+        let nextCategory = currentIndex >= categories.length ? categories[0] : categories[currentIndex];
+
+        this.setState({selectedCategory: nextCategory});
+    }
+
+    selectNextSession() {
+        if (!this.state.data) {
+            return;
+        }
+
+        const {
+            data: { sessions },
+            selectedSession
+        } = this.state;
+
+        const currentIndex = sessions.indexOf(selectedSession) + 1;
+        let nextSession = currentIndex >= sessions.length ? sessions[0] : sessions[currentIndex];
+
+        this.setState({selectedSession: nextSession});
     }
 }
 
