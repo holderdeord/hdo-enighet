@@ -8,6 +8,8 @@ export function logoFor(party) {
     return (
         <img
             className="party-logo"
+            alt={partyNameFor(party)}
+            title={partyNameFor(party)}
             src={`https://www.holderdeord.no/api/parties/${party.toLowerCase()}/logo/?version=${devicePixelRatio > 1 ? 'large' : 'medium'}`}
         />
     );
