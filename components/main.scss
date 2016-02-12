@@ -1,3 +1,4 @@
+@import "~hdo-bootstrap";
 @import "./select.scss";
 @import "~react-select/scss/control";
 @import "~react-select/scss/menu";
@@ -103,6 +104,7 @@ main {
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: auto 2.5rem;
+  font-family: $font-family-serif;
 
   @media screen and (max-width: 48em) {
     text-align: center;
@@ -156,6 +158,7 @@ html ::selection {
   color: #333;
   font-size: 1.3rem;
   font-weight: 300;
+  font-family: $font-family-serif;
   border-bottom: 1px solid #eceeef;
   margin-bottom: 0;
 
@@ -209,15 +212,22 @@ html ::selection {
 }
 
 .controls {
+  font-family: $font-family-serif;
   text-align: center;
 
   .btn-group {
     margin-left: 2rem;
     float: none;
   }
+
+  .category-select {
+    width: 30%;
+    margin: 0 auto;
+  }
 }
 
 footer {
+  font-family: $font-family-serif;
   display: block;
   position: relative;
   margin: 4rem 0;

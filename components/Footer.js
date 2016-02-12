@@ -4,7 +4,7 @@ export default class Footer extends Component {
     render() {
         return (
             <footer>
-                <div className="col-md-4 col-md-offset-4">
+                <div>
                     <a href="https://www.holderdeord.no/">
                         <div className="hdo-logo" style={{backgroundPosition: '50% 0', margin: '0'}}  />
                     </a>

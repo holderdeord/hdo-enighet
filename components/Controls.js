@@ -42,10 +42,8 @@ export default class Controls extends Component {
                     ))}
                 </div>
 
-                <div className="row">
-                    <div className="col-md-4 col-md-offset-4">
-                        {this.renderCategorySelect()}
-                    </div>
+                <div className="category-select">
+                    {this.renderCategorySelect()}
                 </div>
             </div>
         );
