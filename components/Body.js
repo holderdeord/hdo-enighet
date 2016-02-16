@@ -93,7 +93,6 @@ export default class Body extends Component {
                 </main>
 
                 <ComboCharts
-                    ref="charts"
                     {...data}
                     selectedCategory={selectedCategory}
                     unit={unit}
@@ -110,11 +109,11 @@ export default class Body extends Component {
     }
 
     handleCategoryChange(category) {
-        this.setState({selectedCategory: category}, () => this.refs.charts.redraw());
+        this.setState({selectedCategory: category});
     }
 
     handleUnitChange(unit) {
-        this.setState({unit: unit}, () => this.refs.charts.redraw());
+        this.setState({unit: unit});
     }
 
     parse(data) {
