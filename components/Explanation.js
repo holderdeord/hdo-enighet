@@ -32,5 +32,22 @@ export default (props) => (
                 <p>For å unngå at fravær påvirker prosentbrøken, er nevneren alltid lik antall forslag som begge de aktuelle partiene har stemt over.</p>
             </div>
         </div>
+
+        <div className="row p-x-2">
+            <div className="col-lg-6 col-md-12">
+                <small>
+                    <strong>Oppdateringer</strong>
+
+                    <ul>
+                        <li>
+                            17. februar 2016: Rettet et problem hvor enstemmige avstemninger feilaktig
+                            ble tatt med i matrisen når man hadde valgt alle sesjoner og en bestemt kategori.
+                            Dette førte til at partiene fremsto mer enige i enkeltkategorier enn de gjorde totalt.
+
+                        </li>
+                    </ul>
+                </small>
+            </div>
+        </div>
     </div>
 );
