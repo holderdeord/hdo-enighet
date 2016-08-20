@@ -6,12 +6,8 @@
 @import "~react-select/scss/multi";
 @import "~react-select/scss/spinner";
 
-
 $dark-background-color: #fcfcfc;
 $diagonal-pattern: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAIAAABvrngfAAAAK0lEQVQImWM4c+bMf1TA+P//fwYkcPbsWQZkeYgOBjQ+QgjZRAY0/v///wEsaFwPg05jgQAAAABJRU5ErkJggg==");
-
-body {
-}
 
 // avoid iOS zoom
 @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -21,7 +17,6 @@ body {
     font-size: 16px;
   }
 }
-
 
 button {
   outline: none !important;
