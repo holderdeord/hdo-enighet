@@ -70,6 +70,8 @@ export default class Body extends Component {
             unit
         } = this.state;
 
+        const { showCount } = this.props;
+
         return (
             <div>
                 <main>
@@ -77,6 +79,7 @@ export default class Body extends Component {
                         unit={unit}
                         selectedSession={selectedSession}
                         selectedCategory={selectedCategory}
+                        showCount={showCount}
                         {...data}
                     />
 
@@ -93,12 +96,16 @@ export default class Body extends Component {
                 </main>
 
                 <ComboCharts
-                    {...data}
                     selectedCategory={selectedCategory}
                     unit={unit}
+                    showCount={showCount}
+                    {...data}
                 />
 
-                <Explanation currentSession={currentSession} lastUpdate={lastUpdate}/>
+                <Explanation
+                    currentSession={currentSession}
+                    lastUpdate={lastUpdate}
+                />
 
                 <RelatedServices />
             </div>

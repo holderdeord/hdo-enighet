@@ -34,10 +34,17 @@ export default class ComboCharts extends Component {
     }
 
     renderComboChart([left, right]) {
-        const { sessions, bySession, selectedCategory } = this.props;
+        const {
+            sessions,
+            bySession,
+            selectedCategory,
+            showCount
+        } = this.props;
         const key = [left, right].sort().join(',');
         const series = [];
         const isRelative = this.props.unit === 'relative';
+
+        let totalCount = 0;
 
         if (isRelative) {
             let percentData = [];
@@ -47,6 +54,7 @@ export default class ComboCharts extends Component {
                 const combo = selectedCategory === 'all' ? sessionData.all[key] : sessionData.categories[selectedCategory] && sessionData.categories[selectedCategory][key]
 
                 if (combo && combo.total) {
+                    totalCount += combo.total;
                     percentData.push([session, Math.round((combo.count / combo.total) * 100)]);
                 }
             })
@@ -69,6 +77,7 @@ export default class ComboCharts extends Component {
                 const combo = selectedCategory === 'all' ? sessionData.all[key] : sessionData.categories[selectedCategory] && sessionData.categories[selectedCategory][key]
 
                 if (combo && combo.total) {
+                    totalCount += combo.total;
                     countData.push([session, combo.count]);
                     totalData.push([session, combo.total]);
                 }
@@ -146,7 +155,12 @@ export default class ComboCharts extends Component {
             },
 
             credits: {
-                enabled: false
+                position: {
+                    align: 'center',
+                },
+                enabled: showCount,
+                text: `Basert på ${totalCount} voteringsforslag.`,
+                href: null
             },
 
             tooltip: {

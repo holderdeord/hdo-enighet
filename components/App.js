@@ -23,10 +23,24 @@ export default class App extends Component {
     }
 
     render() {
+        const {
+            query: {
+                animate,
+                allCategories,
+                showCount
+            }
+        } = this.state;
+
         return (
             <div id='App' className="container">
                 <Header />
-                <Body animate={this.state.query.animate} allCategories={!!this.state.query.allCategories} />
+
+                <Body
+                    animate={animate}
+                    allCategories={allCategories && allCategories !== 'false'}
+                    showCount={showCount && showCount !== 'false'}
+                />
+
                 <Footer />
             </div>
         );
