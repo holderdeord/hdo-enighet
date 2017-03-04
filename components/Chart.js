@@ -14,8 +14,10 @@ export default class Chart extends Component {
 
         let chartConfig = config.chart;
 
-        if (this.chart && this.props.singleSeriesChange) {
-            this.chart.series[0].setData(config.series[0].data, true);
+        const newData = config.series[0].data.length
+
+        if (this.chart && this.props.singleSeriesChange && this.chart.series[0].data.length === newData.length) {
+            this.chart.series[0].setData(newData, true);
         } else {
             this.chart = new Highcharts.Chart({
                 ...config,

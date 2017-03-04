@@ -10,7 +10,9 @@ import Body from './Body';
 import Footer from './Footer';
 
 export default class App extends Component {
-    state = {};
+    state = {
+        query: qs.parse(window.location.search.slice(1))
+    };
 
     componentDidMount() {
         if (process.env.NODE_ENV === 'production' && window.ga) {
@@ -20,17 +22,11 @@ export default class App extends Component {
         }
     }
 
-    componentWillMount() {
-        this.setState({
-            query: qs.parse(window.location.search.slice(1))
-        })
-    }
-
     render() {
         return (
             <div id='App' className="container">
                 <Header />
-                <Body animate={this.state.query.animate} />
+                <Body animate={this.state.query.animate} allCategories={!!this.state.query.allCategories} />
                 <Footer />
             </div>
         );

@@ -1,4 +1,5 @@
 node_modules/
 build/
 public/agreement.json
+public/agreement-all-categories.json
 npm-debug.log

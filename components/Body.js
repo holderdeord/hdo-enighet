@@ -27,7 +27,7 @@ export default class Body extends Component {
     };
 
     componentDidMount() {
-        const url = 'agreement.json'
+        const url = this.props.allCategories ? 'agreement-all-categories.json' : 'agreement.json';
 
         fetch(url, {credentials: 'same-origin'})
             .then(res => res.json())
@@ -99,6 +99,7 @@ export default class Body extends Component {
                 />
 
                 <Explanation currentSession={currentSession} lastUpdate={lastUpdate}/>
+
                 <RelatedServices />
             </div>
         );
