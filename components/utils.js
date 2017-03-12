@@ -7,6 +7,7 @@ const devicePixelRatio = (!slow && window.devicePixelRatio) || 1
 export function logoFor(party) {
     return (
         <img
+            key={`party-logo-${party}`}
             className="party-logo"
             alt={partyNameFor(party)}
             title={partyNameFor(party)}

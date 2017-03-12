@@ -27,7 +27,8 @@ export default class App extends Component {
             query: {
                 animate,
                 allCategories,
-                showCount
+                showCount,
+                extraCombo
             }
         } = this.state;
 
@@ -39,6 +40,7 @@ export default class App extends Component {
                     animate={animate}
                     allCategories={allCategories && allCategories !== 'false'}
                     showCount={showCount && showCount !== 'false'}
+                    extraCombo={extraCombo}
                 />
 
                 <Footer />

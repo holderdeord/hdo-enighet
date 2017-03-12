@@ -16,31 +16,40 @@ export default class ComboCharts extends Component {
         )
     }
 
-    renderCombo([left, right]) {
+    renderCombo(parties) {
+        let header;
+
+        if (parties.length === 2) {
+            header = <span>{logoFor(parties[0])} v. {logoFor(parties[1])}</span>
+        } else {
+            header = parties.map(p => logoFor(p))
+        }
+
         return (
-            <div key={left+right} id={`${left}-v-${right}`} className="col-md-6">
+            <div key={parties.join('-')} id={parties.join('-vs-')} className="col-md-6">
                 <div className="hdo-card text-xs-center">
                     <div className="hdo-card-header">
-                        <h4>{logoFor(left)} v. {logoFor(right)}</h4>
+                        <h4>{header}</h4>
                         <h5>{this.props.selectedCategory === 'all' ? '' : <span>i saker om <strong>{this.props.selectedCategory}</strong></span>}</h5>
                     </div>
 
                     <div className="p-y-1">
-                        {this.renderComboChart([left, right])}
+                        {this.renderComboChart(parties)}
                     </div>
                 </div>
             </div>
         );
     }
 
-    renderComboChart([left, right]) {
+    renderComboChart(parties) {
         const {
             sessions,
             bySession,
             selectedCategory,
             showCount
         } = this.props;
-        const key = [left, right].sort().join(',');
+
+        const key = parties.sort().join(',');
         const series = [];
         const isRelative = this.props.unit === 'relative';
 
@@ -164,7 +173,7 @@ export default class ComboCharts extends Component {
             },
 
             tooltip: {
-                pointFormat: `<strong>${left} v. ${right}</strong>: ${isRelative ? '{point.y}% enige' : '{series.name}: {point.y}'}`,
+                pointFormat: `<strong>${parties.join(' v. ')}</strong>: ${isRelative ? '{point.y}% enige' : '{series.name}: {point.y}'}`,
             },
 
             series

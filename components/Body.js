@@ -144,6 +144,11 @@ export default class Body extends Component {
             })
         });
 
+        if (this.props.extraCombo) {
+            const extraParties = this.props.extraCombo.split(',').filter(p => parties.includes(p)).sort();
+            combos[extraParties.join()] = extraParties
+        }
+
         const sessions = Object.keys(data.by_session).filter(s => Object.keys(data.by_session[s].all).length > 0)
         const sortedCombos = Object.keys(combos).map(k => combos[k]).sort((a,b) => a.join().localeCompare(b.join()));
 
