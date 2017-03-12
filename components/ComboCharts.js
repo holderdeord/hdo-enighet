@@ -122,7 +122,29 @@ export default class ComboCharts extends Component {
             },
 
             exporting: {
-                enabled: !!this.props.exporting
+                enabled: !!this.props.exporting,
+
+                chartOptions: {
+                    chart: {
+                        backgroundColor: 'white'
+                    },
+
+                    credits: {
+                        enabled: true,
+                        text: 'enighet.holderdeord.no',
+                        href: 'https://enighet.holderdeord.no',
+                        position: { align: 'right' }
+                    },
+
+                    plotOptions: {
+                        series: {
+                            dataLabels: {
+                                enabled: true,
+                                color: '#777'
+                            }
+                        }
+                    }
+                }
             },
 
             title: {
