@@ -1,5 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import Highcharts from 'highcharts';
+import Exporting from 'highcharts/modules/exporting.src.js';
+import OfflineExporting from 'highcharts/modules/offline-exporting.src.js';
+
+Exporting(Highcharts);
+OfflineExporting(Highcharts);
 
 export default class Chart extends Component {
     propTypes: {

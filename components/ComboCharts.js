@@ -121,6 +121,10 @@ export default class ComboCharts extends Component {
                 }
             },
 
+            exporting: {
+                enabled: !!this.props.exporting
+            },
+
             title: {
                 text: '',
                 enabled: false,

@@ -28,7 +28,8 @@ export default class App extends Component {
                 animate,
                 allCategories,
                 showCount,
-                extraCombo
+                extraCombo,
+                exporting
             }
         } = this.state;
 
@@ -41,6 +42,7 @@ export default class App extends Component {
                     allCategories={allCategories && allCategories !== 'false'}
                     showCount={showCount && showCount !== 'false'}
                     extraCombo={extraCombo}
+                    exporting={exporting && exporting !== 'false'}
                 />
 
                 <Footer />

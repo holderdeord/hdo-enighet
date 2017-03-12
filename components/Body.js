@@ -99,6 +99,7 @@ export default class Body extends Component {
                     selectedCategory={selectedCategory}
                     unit={unit}
                     showCount={showCount}
+                    exporting={this.props.exporting}
                     {...data}
                 />
 
