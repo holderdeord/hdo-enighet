@@ -129,6 +129,11 @@ export default class ComboCharts extends Component {
                         backgroundColor: 'white'
                     },
 
+                    title: {
+                        enabled: true,
+                        text: parties.join(', ')
+                    },
+
                     credits: {
                         enabled: true,
                         text: 'enighet.holderdeord.no',
