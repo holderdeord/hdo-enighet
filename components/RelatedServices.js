@@ -14,9 +14,7 @@ export default class RelatedServices extends Component {
 
     render() {
         const services = this.state.services.filter(s => 
-            s.enabled && 
-                s.url.indexOf('enighet.holderdeord.no') === -1 &&
-                s.title.indexOf('Løftedatabasen') === -1
+            s.enabled && s.url.indexOf('enighet.holderdeord.no') === -1
         );
 
         if (!services.length) {
