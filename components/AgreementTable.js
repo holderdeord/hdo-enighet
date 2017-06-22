@@ -60,10 +60,10 @@ export default class AgreementTable extends Component {
         }
 
         const {
-            selectedSession,
+            selectedTimeUnit,
             selectedCategory,
-            sessions,
-            bySession,
+            timeUnits,
+            byTimeUnit,
             allTime,
             unit
         } = this.props;
@@ -73,10 +73,10 @@ export default class AgreementTable extends Component {
 
         let combo;
 
-        if (selectedSession === 'all') {
+        if (selectedTimeUnit === 'all') {
             combo = selectedCategory === 'all' ? allTime.all[key] : allTime.categories[selectedCategory] && allTime.categories[selectedCategory][key];
         } else {
-            combo = selectedCategory === 'all' ? bySession[selectedSession].all[key] : bySession[selectedSession].categories[selectedCategory] && bySession[selectedSession].categories[selectedCategory][key];
+            combo = selectedCategory === 'all' ? byTimeUnit[selectedTimeUnit].all[key] : byTimeUnit[selectedTimeUnit].categories[selectedCategory] && byTimeUnit[selectedTimeUnit].categories[selectedCategory][key];
         }
 
         let val = 0, count = 0, total = 0;

@@ -29,7 +29,8 @@ export default class App extends Component {
                 allCategories,
                 showCount,
                 extraCombo,
-                exporting
+                exporting,
+                timeUnit
             }
         } = this.state;
 
@@ -43,6 +44,7 @@ export default class App extends Component {
                     showCount={showCount && showCount !== 'false'}
                     extraCombo={extraCombo}
                     exporting={exporting && exporting !== 'false'}
+                    timeUnit={timeUnit || 'session'}
                 />
 
                 <Footer />

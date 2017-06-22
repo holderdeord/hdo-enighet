@@ -19,7 +19,7 @@ export default (props) => (
                     Datagrunnlaget kommer i hovedsak fra <a href="http://data.stortinget.no/">Stortingets datatjeneste</a>, som er lisensiert under <a href="http://data.norge.no/NLOD">NLOD</a>.
                 </p>
 
-                <p>Inneværende sesjon ({props.currentSession}) er ufullstendig. Tallene oppdateres daglig, og ble sist oppdatert <strong>{moment(props.lastUpdate).fromNow()}</strong>.</p>
+                <p>Inneværende sesjon ({props.currentTimeUnit}) er ufullstendig. Tallene oppdateres daglig, og ble sist oppdatert <strong>{moment(props.lastUpdate).fromNow()}</strong>.</p>
             </div>
 
             <div className="col-lg-4 col-md-12">

@@ -17,11 +17,16 @@ const PARTY_ORDER = [
     'V',
     'H',
     'FrP'
-]
+];
+
+const TIME_UNIT_NAMES = {
+    session: 'Alle sesjoner',
+    period: 'Alle perioder'
+}
 
 export default class Body extends Component {
     state = {
-        selectedSession: 'all',
+        selectedTimeUnit: 'all',
         selectedCategory: 'all',
         unit: 'relative'
     };
@@ -39,8 +44,8 @@ export default class Body extends Component {
                     this.selectNextCategory();
                 }
 
-                if (this.props.animate.includes('sessions')) {
-                    this.selectNextSession();
+                if (this.props.animate.includes('timeUnits')) {
+                    this.selectNextTimeUnit();
                 }
             }, 1000);
         }
@@ -63,9 +68,9 @@ export default class Body extends Component {
         }
 
         const {
-            data: { sessions, currentSession, lastUpdate, categories},
+            data: { timeUnits, currentTimeUnit, lastUpdate, categories},
             data,
-            selectedSession,
+            selectedTimeUnit,
             selectedCategory,
             unit
         } = this.state;
@@ -77,7 +82,7 @@ export default class Body extends Component {
                 <main>
                     <AgreementTable
                         unit={unit}
-                        selectedSession={selectedSession}
+                        selectedTimeUnit={selectedTimeUnit}
                         selectedCategory={selectedCategory}
                         showCount={showCount}
                         {...data}
@@ -85,11 +90,12 @@ export default class Body extends Component {
 
                     <Controls
                         unit={unit}
+                        allTimeUnitsName={TIME_UNIT_NAMES[this.props.timeUnit] || 'Alle ukjente'}
                         categories={['all', ...categories]}
-                        sessions={['all', ...sessions]}
+                        timeUnits={['all', ...timeUnits]}
                         selectedCategory={selectedCategory}
-                        selectedSession={selectedSession}
-                        onSessionChange={::this.handleSessionChange}
+                        selectedTimeUnit={selectedTimeUnit}
+                        onTimeUnitChange={::this.handleTimeUnitChange}
                         onCategoryChange={::this.handleCategoryChange}
                         onUnitChange={::this.handleUnitChange}
                      />
@@ -104,7 +110,7 @@ export default class Body extends Component {
                 />
 
                 <Explanation
-                    currentSession={currentSession}
+                    currentTimeUnit={currentTimeUnit}
                     lastUpdate={lastUpdate}
                 />
 
@@ -113,8 +119,8 @@ export default class Body extends Component {
         );
     }
 
-    handleSessionChange(session) {
-        this.setState({selectedSession: session});
+    handleTimeUnitChange(timeUnit) {
+        this.setState({selectedTimeUnit: timeUnit});
     }
 
     handleCategoryChange(category) {
@@ -150,17 +156,19 @@ export default class Body extends Component {
             combos[extraParties.join()] = extraParties
         }
 
-        const sessions = Object.keys(data.by_session).filter(s => Object.keys(data.by_session[s].all).length > 0)
+        const timeUnitMap = data[`by_${this.props.timeUnit}`];
+
+        const timeUnits = Object.keys(timeUnitMap).filter(s => Object.keys(timeUnitMap[s].all).length > 0)
         const sortedCombos = Object.keys(combos).map(k => combos[k]).sort((a,b) => a.join().localeCompare(b.join()));
 
         return {
             parties,
             combos: sortedCombos,
-            sessions,
+            timeUnits,
             categories: data.categories.sort((a, b) => a.localeCompare(b)),
             allTime: data.all_time,
-            bySession: data.by_session,
-            currentSession: data.current_session,
+            byTimeUnit: timeUnitMap,
+            currentTimeUnit: data[`current_${this.props.timeUnit}`],
             lastUpdate: data.last_update
         };
     }
@@ -197,20 +205,20 @@ export default class Body extends Component {
         this.setState({selectedCategory: nextCategory});
     }
 
-    selectNextSession() {
+    selectNextTimeUnit() {
         if (!this.state.data) {
             return;
         }
 
         const {
-            data: { sessions },
-            selectedSession
+            data: { timeUnits },
+            selectedTimeUnit
         } = this.state;
 
-        const currentIndex = sessions.indexOf(selectedSession) + 1;
-        let nextSession = currentIndex >= sessions.length ? sessions[0] : sessions[currentIndex];
+        const currentIndex = timeUnits.indexOf(selectedTimeUnit) + 1;
+        let nextTimeUnit = currentIndex >= timeUnits.length ? timeUnits[0] : timeUnits[currentIndex];
 
-        this.setState({selectedSession: nextSession});
+        this.setState({selectedTimeUnit: nextTimeUnit});
     }
 }
 

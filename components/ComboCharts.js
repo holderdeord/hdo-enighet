@@ -4,8 +4,8 @@ import groupBy from 'lodash.groupby';
 import Chart from './Chart';
 
 export default class ComboCharts extends Component {
-    shouldComponentUpdate({bySession, selectedCategory, unit}, nextState) {
-        return this.props.bySession !== bySession || selectedCategory !== this.props.selectedCategory;
+    shouldComponentUpdate({byTimeUnit, selectedCategory, unit}, nextState) {
+        return this.props.byTimeUnit !== byTimeUnit || selectedCategory !== this.props.selectedCategory;
     }
 
     render() {
@@ -43,8 +43,8 @@ export default class ComboCharts extends Component {
 
     renderComboChart(parties) {
         const {
-            sessions,
-            bySession,
+            timeUnits,
+            byTimeUnit,
             selectedCategory,
             showCount
         } = this.props;
@@ -58,13 +58,13 @@ export default class ComboCharts extends Component {
         if (isRelative) {
             let percentData = [];
 
-            sessions.map(session => {
-                const sessionData = bySession[session];
-                const combo = selectedCategory === 'all' ? sessionData.all[key] : sessionData.categories[selectedCategory] && sessionData.categories[selectedCategory][key]
+            timeUnits.map(timeUnit => {
+                const timeUnitData = byTimeUnit[timeUnit];
+                const combo = selectedCategory === 'all' ? timeUnitData.all[key] : timeUnitData.categories[selectedCategory] && timeUnitData.categories[selectedCategory][key]
 
                 if (combo && combo.total) {
                     totalCount += combo.total;
-                    percentData.push([session, Math.round((combo.count / combo.total) * 100)]);
+                    percentData.push([timeUnit, Math.round((combo.count / combo.total) * 100)]);
                 }
             })
 
@@ -81,14 +81,14 @@ export default class ComboCharts extends Component {
             let countData = [];
             let totalData = [];
 
-            sessions.map(session => {
-                const sessionData = bySession[session];
-                const combo = selectedCategory === 'all' ? sessionData.all[key] : sessionData.categories[selectedCategory] && sessionData.categories[selectedCategory][key]
+            timeUnits.map(timeUnit => {
+                const timeUnitData = byTimeUnit[timeUnit];
+                const combo = selectedCategory === 'all' ? timeUnitData.all[key] : timeUnitData.categories[selectedCategory] && timeUnitData.categories[selectedCategory][key]
 
                 if (combo && combo.total) {
                     totalCount += combo.total;
-                    countData.push([session, combo.count]);
-                    totalData.push([session, combo.total]);
+                    countData.push([timeUnit, combo.count]);
+                    totalData.push([timeUnit, combo.total]);
                 }
             })
 

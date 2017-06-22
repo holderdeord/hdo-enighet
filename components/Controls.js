@@ -12,7 +12,7 @@ export default class Controls extends Component {
                 </div>
 
                 <div className="hidden-sm-up p-a-1">
-                    <div className="p-b-1">{this.renderSessionSelect()}</div>
+                    <div className="p-b-1">{this.renderTimeUnitSelect()}</div>
                     {this.renderCategorySelect()}
                 </div>
             </div>
@@ -21,8 +21,8 @@ export default class Controls extends Component {
 
     renderToolbar() {
         const {
-            sessions,
-            selectedSession,
+            timeUnits,
+            selectedTimeUnit,
             selectedCategory,
             categories,
             unit,
@@ -32,12 +32,12 @@ export default class Controls extends Component {
         return (
             <div className="hdo-card-header">
                 <div className="btn-group btn-group-sm p-b-1" role="group">
-                    {this.props.sessions.map(session => (
-                        <button key={session}
+                    {this.props.timeUnits.map(timeUnit => (
+                        <button key={timeUnit}
                                 type="button"
-                                onClick={this.props.onSessionChange.bind(null, session)}
-                                className={classnames('btn', 'btn-secondary', {active: session === selectedSession})}>
-                                    {session === 'all' ? 'Alle sesjoner' : session}
+                                onClick={this.props.onTimeUnitChange.bind(null, timeUnit)}
+                                className={classnames('btn', 'btn-secondary', {active: timeUnit === selectedTimeUnit})}>
+                                    {timeUnit === 'all' ? 'Alle sesjoner' : timeUnit}
                             </button>
                     ))}
                 </div>
@@ -69,20 +69,20 @@ export default class Controls extends Component {
         );
     }
 
-    renderSessionSelect() {
-        const { sessions, selectedSession } = this.props;
+    renderTimeUnitSelect() {
+        const { timeUnits, selectedTimeUnit } = this.props;
 
-        const options = this.props.sessions.map(session => ({
-            value: session,
-            label: session === 'all' ? 'Alle sesjoner' : session
+        const options = this.props.timeUnits.map(timeUnit => ({
+            value: timeUnit,
+            label: timeUnit === 'all' ? 'Alle sesjoner' : timeUnit
         }));
 
         return (
             <Select
                 clearable={false}
                 searchable={false}
-                value={selectedSession}
-                onChange={this.props.onSessionChange}
+                value={selectedTimeUnit}
+                onChange={this.props.onTimeUnitChange}
                 options={options}
             />
         );
