@@ -15,15 +15,18 @@ export default class AgreementTable extends Component {
         .range(['#dd0000', 'white', '#106E0E']);
 
     render() {
-        const {
+        let {
             parties,
             unit
         } = this.props;
+
+        parties = parties.filter(e => e !== 'Uav')
 
         const {
             left: highlightLeft,
             right: highlightRight
         } = this.state.comboHighlight;
+
 
         return (
             <div className={"table-responsive"}>

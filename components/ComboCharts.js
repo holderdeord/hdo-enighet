@@ -11,7 +11,7 @@ export default class ComboCharts extends Component {
     render() {
         return (
             <div className="row">
-                {this.props.combos.map(combo => this.renderCombo(combo))}
+                {this.props.combos.filter(combo => !combo.includes('Uav')).map(combo => this.renderCombo(combo))}
             </div>
         )
     }

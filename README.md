@@ -5,6 +5,7 @@ Visualize party agreement in the Norwegian parliament.
 ## Development
 
     $ npm install
+    $ npm run fetch-data
     $ npm run dev
 
     # Open http://localhost:3000

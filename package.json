@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "bundle.js",
   "scripts": {
-    "fetch-data": "curl https://www.holderdeord.no/data/agreement.json -o public/agreement.json",
+    "fetch-data": "curl -L https://data.holderdeord.no/data/agreement.json -o public/agreement.json",
     "dev": "node server/dev-server.js",
     "lint": "eslint components",
     "build": "webpack --bail --optimize-minimize --optimize-occurence-order --optimize-dedupe && cp -R $(ls public/* | grep -v agreement.json | xargs) build/",
