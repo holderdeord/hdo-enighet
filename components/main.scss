@@ -193,7 +193,12 @@ html ::selection {
   }
 
   @media (max-width: 34em) {
-    font-size: .9rem;
+    font-size: .85rem;
+
+    &.table-sm th,
+    &.table-sm td {
+      padding: .2rem;
+    }
 
     .party-logo {
       width: 26px;
