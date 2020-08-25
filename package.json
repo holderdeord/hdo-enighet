@@ -42,7 +42,7 @@
     "file-loader": "^0.8.5",
     "font-awesome": "^4.5.0",
     "hdo-bootstrap": "git+https://github.com/holderdeord/hdo-bootstrap.git",
-    "highcharts": "^4.2.3",
+    "highcharts": "^7.2.2",
     "isomorphic-fetch": "^2.2.1",
     "lodash.groupby": "^4.0.1",
     "moment": "^2.11.1",
