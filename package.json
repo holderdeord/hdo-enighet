@@ -4,6 +4,7 @@
   "main": "bundle.js",
   "scripts": {
     "fetch-data": "curl -L https://data.holderdeord.no/data/agreement.json -o public/agreement.json",
+    "calculate": "node bin/calculate-agreement.js",
     "dev": "node server/dev-server.js",
     "lint": "eslint components",
     "build": "webpack --bail --optimize-minimize --optimize-occurence-order --optimize-dedupe && cp -R $(ls public/* | grep -v agreement.json | xargs) build/",
@@ -46,7 +47,7 @@
     "isomorphic-fetch": "^2.2.1",
     "lodash.groupby": "^4.0.1",
     "moment": "^2.11.1",
-    "node-sass": "^3.4.2",
+    "node-sass": "^5.0.0",
     "path": "^0.12.7",
     "postcss": "^5.0.14",
     "postcss-loader": "^0.8.0",
